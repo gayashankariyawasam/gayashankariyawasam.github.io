@@ -39,6 +39,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  /* Native smooth-scroll for environments without Lenis (touch devices, reduced
+     motion). Lenis adds .lenis-smooth on html which overrides this — see below. */
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   background: var(--bg);

@@ -6,7 +6,7 @@ import { KonamiTerminal } from "./KonamiTerminal";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-border px-6 py-10">
+    <footer className="relative border-t border-border px-6 py-10 pb-[max(2.5rem,calc(2.5rem+env(safe-area-inset-bottom)))]">
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div className="text-sm text-text-muted">
           © {year} {profile.name}. Built with Next.js, GSAP, Motion & Three.js.

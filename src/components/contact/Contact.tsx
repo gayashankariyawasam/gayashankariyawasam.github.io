@@ -40,7 +40,7 @@ export function Contact() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5 lg:gap-16">
           <div className="lg:col-span-3">
             <Reveal delay={0.05}>
-              <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-text sm:text-6xl lg:text-7xl">
+              <h2 className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-text sm:text-5xl md:text-6xl lg:text-7xl">
                 Have an{" "}
                 <span className="text-gradient">AI agent problem</span>{" "}
                 worth solving?

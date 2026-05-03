@@ -16,7 +16,7 @@ export function Hero() {
       className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
-      <div className="absolute inset-0" aria-hidden>
+      <div className="absolute inset-0 hidden sm:block" aria-hidden>
         <HeroScene3D />
       </div>
 

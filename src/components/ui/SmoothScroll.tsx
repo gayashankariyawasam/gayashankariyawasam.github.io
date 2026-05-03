@@ -9,6 +9,9 @@ export function SmoothScroll() {
 
   useEffect(() => {
     if (reduced) return;
+    // Skip Lenis on touch devices — native momentum scroll feels better and
+    // avoids fighting iOS Safari's rubber-band behavior.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const lenis = new Lenis({
       duration: 1.1,
