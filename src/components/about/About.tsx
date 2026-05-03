@@ -116,7 +116,7 @@ export function About() {
           {/* Newsletter */}
           <Reveal delay={0.3} className="lg:col-span-1">
             <a
-              href={profile.socials.linkedin}
+              href={profile.socials.newsletter}
               target="_blank"
               rel="noopener noreferrer"
               className="glass card-hover group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6"
@@ -131,7 +131,7 @@ export function About() {
                   From Code to AI Strategy
                 </div>
                 <div className="mt-2 text-sm text-text-muted">
-                  On LinkedIn
+                  Subscribe on LinkedIn →
                 </div>
               </div>
             </a>

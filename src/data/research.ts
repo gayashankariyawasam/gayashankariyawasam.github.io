@@ -39,6 +39,6 @@ export const newsletterPosts: NewsletterPost[] = [
     title: "From Code to AI Strategy",
     excerpt:
       "Writing on the shift from AI curiosity → AI capability → AI strategy. Agent design, evaluation, MCP servers, security, and the organisational work it takes to ship.",
-    url: "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
+    url: "https://www.linkedin.com/newsletters/from-code-to-ai-strategy-7439360032959524865/",
   },
 ];

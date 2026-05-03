@@ -29,7 +29,7 @@ export const profile = {
     scholar: "https://scholar.google.com/citations?user=arKNy4MAAAAJ&hl=en",
     ieee: "https://ieeexplore.ieee.org/document/8959600",
     newsletter:
-      "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
+      "https://www.linkedin.com/newsletters/from-code-to-ai-strategy-7439360032959524865/",
   },
 
   siteUrl: "https://gayashankariyawasam.github.io",

@@ -65,6 +65,7 @@ export function personJsonLd() {
       profile.socials.github,
       profile.socials.scholar,
       profile.socials.ieee,
+      profile.socials.newsletter,
     ],
   } as const;
 }
