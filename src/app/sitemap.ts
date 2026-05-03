@@ -14,9 +14,12 @@ function lastCommitDate(): Date {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const url = profile.siteUrl.endsWith("/")
+    ? profile.siteUrl
+    : `${profile.siteUrl}/`;
   return [
     {
-      url: profile.siteUrl,
+      url,
       lastModified: lastCommitDate(),
       changeFrequency: "monthly",
       priority: 1,
