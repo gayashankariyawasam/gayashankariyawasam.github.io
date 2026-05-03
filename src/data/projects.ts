@@ -114,7 +114,7 @@ export const projects: Project[] = [
     links: [
       {
         label: "Read on LinkedIn",
-        url: "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
+        url: "https://www.linkedin.com/newsletters/from-code-to-ai-strategy-7439360032959524865/",
       },
     ],
   },

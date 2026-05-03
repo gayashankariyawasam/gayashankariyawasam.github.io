@@ -57,7 +57,7 @@ export function KonamiTerminal() {
       case "contact":
         out = "Best reach: LinkedIn — opening now…";
         window.open(
-          "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
+          "https://www.linkedin.com/in/gayashan-kariyawasam/",
           "_blank"
         );
         break;

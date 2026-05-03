@@ -24,7 +24,7 @@ export const profile = {
   ],
 
   socials: {
-    linkedin: "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
+    linkedin: "https://www.linkedin.com/in/gayashan-kariyawasam/",
     github: "https://github.com/gayashankariyawasam",
     scholar: "https://scholar.google.com/citations?user=arKNy4MAAAAJ&hl=en",
     ieee: "https://ieeexplore.ieee.org/document/8959600",
