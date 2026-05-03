@@ -11,7 +11,6 @@ export const stack: StackCategory[] = [
       "Java",
       "TypeScript",
       "JavaScript",
-      "C#",
       "SQL",
       "PL/SQL",
       "Shell",
@@ -47,14 +46,15 @@ export const stack: StackCategory[] = [
   {
     category: "Backend & APIs",
     items: [
+      "Java",
+      "Python",
       "Spring Framework",
       "Spring Boot",
       "Hibernate",
       "Node.js",
+      "FastAPI",
       "REST",
       "Microservices",
-      "OData",
-      "ASP.NET Core",
     ],
   },
   {
