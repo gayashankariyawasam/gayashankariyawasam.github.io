@@ -49,8 +49,17 @@ export function MetricsStrip() {
           >
             <div className="font-mono text-3xl font-semibold leading-none tracking-tight text-text sm:text-4xl">
               <span className="text-gradient">
-                <CountUp to={m.value} />
-                {m.suffix}
+                {typeof m.value === "number" ? (
+                  <>
+                    <CountUp to={m.value} />
+                    {m.suffix ?? ""}
+                  </>
+                ) : (
+                  <>
+                    {m.value}
+                    {m.suffix ?? ""}
+                  </>
+                )}
               </span>
             </div>
             <div className="text-xs leading-snug text-text-muted">

@@ -1,6 +1,6 @@
 export type Metric = {
-  value: number;
-  suffix: string;
+  value: number | string;
+  suffix?: string;
   label: string;
   source: string;
 };
@@ -13,16 +13,14 @@ export const heroMetrics: Metric[] = [
     source: "Career",
   },
   {
-    value: 40,
-    suffix: "%",
-    label: "Reduction in support escalations (IDRP)",
-    source: "CodeGen / IDRP",
+    value: "AI Lead",
+    label: "AI & Platform Engineering @ CodeGen International",
+    source: "CodeGen International",
   },
   {
-    value: 60,
-    suffix: "%",
-    label: "Fewer redundant API calls (LLM cancellation pipeline)",
-    source: "CodeGen",
+    value: "MSc",
+    label: "Software Architecture · Moratuwa (in progress)",
+    source: "University of Moratuwa",
   },
   {
     value: 53,
