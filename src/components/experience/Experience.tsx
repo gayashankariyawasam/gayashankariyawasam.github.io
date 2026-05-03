@@ -1,15 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { experiences } from "@/data/experience";
 import { Reveal } from "@/components/ui/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export function Experience() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,43 +13,75 @@ export function Experience() {
   useEffect(() => {
     if (reduced || !containerRef.current || !lineRef.current) return;
 
-    const line = lineRef.current;
-    line.style.transformOrigin = "top center";
-    gsap.fromTo(
-      line,
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          end: "bottom 80%",
-          scrub: 0.5,
-        },
-      }
+    let cleanup: (() => void) | undefined;
+    let cancelled = false;
+
+    // Lazy-load GSAP + ScrollTrigger only when the timeline is near the
+    // viewport. Saves ~75 KB gzipped from the initial bundle for visitors who
+    // never scroll past the hero.
+    const obs = new IntersectionObserver(
+      async ([entry]) => {
+        if (!entry.isIntersecting) return;
+        obs.disconnect();
+        if (cancelled || !containerRef.current || !lineRef.current) return;
+
+        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
+        if (cancelled || !containerRef.current || !lineRef.current) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const line = lineRef.current;
+        line.style.transformOrigin = "top center";
+        gsap.fromTo(
+          line,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 70%",
+              end: "bottom 80%",
+              scrub: 0.5,
+            },
+          }
+        );
+
+        const dots = containerRef.current.querySelectorAll<HTMLElement>("[data-dot]");
+        dots.forEach((dot) => {
+          gsap.fromTo(
+            dot,
+            { scale: 0, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.4,
+              ease: "back.out(2)",
+              scrollTrigger: {
+                trigger: dot,
+                start: "top 80%",
+              },
+            }
+          );
+        });
+
+        cleanup = () => {
+          ScrollTrigger.getAll().forEach((t) => t.kill());
+        };
+      },
+      // Pre-load the chunk slightly before the section enters the viewport so
+      // the animation is ready by the time it scrolls in.
+      { rootMargin: "200px 0px 200px 0px" }
     );
 
-    const dots = containerRef.current.querySelectorAll<HTMLElement>("[data-dot]");
-    dots.forEach((dot) => {
-      gsap.fromTo(
-        dot,
-        { scale: 0, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.4,
-          ease: "back.out(2)",
-          scrollTrigger: {
-            trigger: dot,
-            start: "top 80%",
-          },
-        }
-      );
-    });
+    obs.observe(containerRef.current);
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      cancelled = true;
+      obs.disconnect();
+      cleanup?.();
     };
   }, [reduced]);
 

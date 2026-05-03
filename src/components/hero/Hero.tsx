@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -10,15 +11,29 @@ import { Magnetic } from "@/components/ui/Magnetic";
 const HeroScene3D = dynamic(() => import("./HeroScene3D"), { ssr: false });
 
 export function Hero() {
+  const [show3D, setShow3D] = useState(false);
+
+  useEffect(() => {
+    // Only render the Three.js scene on tablet+ viewports — gates the dynamic
+    // import so mobile users never download ~290 KB of Three.js + r3f + drei.
+    const mq = window.matchMedia("(min-width: 640px)");
+    const update = () => setShow3D(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   return (
     <section
       id="top"
       className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
-      <div className="absolute inset-0 hidden sm:block" aria-hidden>
-        <HeroScene3D />
-      </div>
+      {show3D && (
+        <div className="absolute inset-0" aria-hidden>
+          <HeroScene3D />
+        </div>
+      )}
 
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-bg via-bg/60 to-transparent" />
 
