@@ -8,7 +8,6 @@ export const profile = {
   companyUrl: "https://codegen.com",
   location: "Colombo, Sri Lanka",
   timezone: "Asia/Colombo",
-  email: "gmkariyawasam@gmail.com",
   yearsExperience: 6,
 
   tagline: "From AI curiosity → AI capability → AI strategy.",
@@ -31,7 +30,6 @@ export const profile = {
     ieee: "https://ieeexplore.ieee.org/document/8959600",
     newsletter:
       "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
-    email: "mailto:gmkariyawasam@gmail.com",
   },
 
   siteUrl: "https://gayashankariyawasam.github.io",

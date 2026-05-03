@@ -55,7 +55,11 @@ export function KonamiTerminal() {
           "Python · LangChain · OpenAI · Anthropic · FastAPI · Node.js · TypeScript · AWS · Docker · Kubernetes · React · Next.js";
         break;
       case "contact":
-        out = "gmkariyawasam@gmail.com";
+        out = "Best reach: LinkedIn — opening now…";
+        window.open(
+          "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
+          "_blank"
+        );
         break;
       case "github":
         out = "Opening github.com/gayashankariyawasam …";

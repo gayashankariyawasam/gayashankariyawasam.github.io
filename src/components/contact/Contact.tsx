@@ -1,18 +1,12 @@
 "use client";
 
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
 import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { GithubIcon, LinkedinIcon, ScholarIcon } from "@/components/ui/icons";
 
 const socials = [
-  {
-    label: "Email",
-    href: profile.socials.email,
-    icon: Mail,
-    handle: profile.email,
-  },
   {
     label: "LinkedIn",
     href: profile.socials.linkedin,
@@ -63,10 +57,12 @@ export function Contact() {
               <div className="mt-10">
                 <Magnetic strength={0.2}>
                   <a
-                    href={profile.socials.email}
+                    href={profile.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group inline-flex items-center gap-3 rounded-full bg-text px-7 py-4 text-base font-medium text-bg transition-colors hover:bg-white"
                   >
-                    Start a conversation
+                    Start a conversation on LinkedIn
                     <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </Magnetic>
@@ -81,7 +77,7 @@ export function Contact() {
                   <li key={s.label}>
                     <a
                       href={s.href}
-                      target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="glass card-hover group flex items-center justify-between gap-4 rounded-2xl px-5 py-4"
                     >
