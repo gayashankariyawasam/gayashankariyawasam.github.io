@@ -89,8 +89,7 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   verification: {
-    // Replace with the token from Google Search Console (Settings → Ownership → HTML tag)
-    google: "REPLACE_WITH_GOOGLE_SITE_VERIFICATION_TOKEN",
+    google: "_6mGi9_9zuFeP-Vucsw2vMjVCa0ptTHyKxeQCku8SNE",
   },
   category: "technology",
 };
