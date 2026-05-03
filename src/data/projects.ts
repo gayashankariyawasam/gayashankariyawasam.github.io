@@ -3,7 +3,7 @@ export type Project = {
   blurb: string;
   description: string;
   year: string;
-  category: "AI" | "Backend" | "Research" | "Web" | "Platform" | "AR";
+  category: "AI" | "Backend" | "Research" | "Web" | "Platform";
   stack: string[];
   metric?: string;
   links?: { label: string; url: string }[];
@@ -30,10 +30,10 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Custom MCP Servers (Python)",
-    blurb: "Model Context Protocol servers powering AI-assisted dev workflows",
+    title: "Building MCP Servers",
+    blurb: "Production experience designing Model Context Protocol servers",
     description:
-      "Architected and implemented custom Model Context Protocol servers in Python — an agentic RAG system for API documentation, plus a driver-context server for integration patterns — enabling AI-assisted development across the engineering organisation.",
+      "Hands-on experience designing and building Model Context Protocol (MCP) servers in Python — including agentic RAG systems for technical documentation and context-providing servers for integration patterns — enabling AI-assisted development workflows across engineering teams.",
     year: "2024",
     category: "AI",
     metric: "Org-wide AI dev workflow",
@@ -41,10 +41,10 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "LLM Cancellation-Policy Pipeline (Dhisco)",
+    title: "LLM Cancellation-Policy Pipeline",
     blurb: "Redis-backed LLM inference + prompt engineering for hotel cancellation policies",
     description:
-      "Engineered an LLM-powered cancellation policy interpretation pipeline for the Dhisco integration with Redis-backed inference caching and prompt-engineering optimization — eliminated ~60% of redundant API calls, reduced p95 search latency by ~30%, and cut LLM inference costs while preserving accuracy.",
+      "Engineered an LLM-powered cancellation policy interpretation pipeline for a hospitality distribution integration with Redis-backed inference caching and prompt-engineering optimization — eliminated ~60% of redundant API calls, reduced p95 search latency by ~30%, and cut LLM inference costs while preserving accuracy.",
     year: "2024",
     category: "AI",
     metric: "60% ↓ API calls · 30% ↓ p95 latency",
@@ -63,13 +63,13 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "H2H Hotel Integrations",
-    blurb: "Production-grade integrations across major hospitality providers",
+    title: "H2H Hospitality Integrations",
+    blurb: "Production-grade integrations across major hospitality distribution partners",
     description:
-      "Delivered H2H integrations covering full lifecycle flows — search, book, cancel, lookup — across Expedia, Webbeds, Umrahme and Juniper, with production-grade reliability and observability.",
+      "Delivered host-to-host integrations covering full lifecycle flows — search, book, cancel, lookup — across multiple major hospitality and travel distribution partners, with production-grade reliability and observability.",
     year: "2023",
     category: "Backend",
-    metric: "4 major hospitality providers",
+    metric: "Multiple hospitality distribution partners",
     stack: ["Java", "Spring", "REST APIs", "MySQL"],
   },
   {
@@ -102,15 +102,6 @@ export const projects: Project[] = [
       },
     ],
     featured: true,
-  },
-  {
-    title: "HoloLens AR — IFS Spectator View",
-    blurb: "Microsoft HoloLens features + Digital Twin IoT prototype at IFS",
-    description:
-      "Built Spectator View Pro and Spectator View Mobile features for Microsoft HoloLens at IFS R&D, upgraded the IFS HoloLens API to support IFS Application 10, and prototyped a Digital Twin integration via Raspberry Pi connecting IoT devices to the IFS IoT Business Connector.",
-    year: "2019",
-    category: "AR",
-    stack: ["Unity 3D", "C#", "HoloLens", "ASP.NET Core", "Python", "OData"],
   },
   {
     title: "From Code to AI Strategy",

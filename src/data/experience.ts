@@ -20,14 +20,14 @@ export const experiences: Experience[] = [
     end: "Present",
     location: "Colombo, Sri Lanka",
     summary:
-      "Lead the design, development and deployment of agentic AI systems and LLM-powered platforms at enterprise scale. Mentor a team of six senior engineers and act as the primary technical contact for AI initiatives across multiple products.",
+      "Lead the design, development and deployment of agentic AI systems and LLM-powered platforms at enterprise scale. Mentor a team of senior engineers and act as the primary technical contact for AI initiatives across multiple enterprise integrations.",
     highlights: [
       "Led IDRP — an agentic conversational AI platform for self-service API testing, log tracing and integration troubleshooting. Reduced support escalations by 40%+",
-      "Architected custom Model Context Protocol (MCP) servers in Python: an agentic RAG system for API documentation and a driver-context server for integration patterns",
-      "Engineered an LLM-powered cancellation policy interpretation pipeline (Dhisco) with Redis-backed inference caching and prompt-engineering optimization — eliminated ~60% of redundant API calls and reduced p95 search latency by ~30%",
+      "Hands-on experience designing and building Model Context Protocol (MCP) servers in Python — including agentic RAG systems for technical documentation and context-providing servers for integration patterns",
+      "Engineered an LLM-powered cancellation policy interpretation pipeline for a hospitality distribution integration with Redis-backed inference caching and prompt-engineering optimization — eliminated ~60% of redundant API calls and reduced p95 search latency by ~30%",
       "Drove enterprise-wide adoption of agentic dev tooling (Claude Code, Kiro, Antigravity, Codex, Qwen) and authored custom Claude Code commands",
       "Initiated and led the Tritium OPS Tool — deployment governance, audit trails, GitOps and Jira integration, and an admin dashboard",
-      "Mentored six senior engineers; primary technical contact for Dhisco Revamp, AOS, NEXO and Juniper engagements",
+      "Mentor senior engineers across code review, system design, agentic development and stakeholder communication; primary technical contact for AI initiatives across multiple enterprise integrations",
     ],
     stack: [
       "Python",
@@ -42,7 +42,6 @@ export const experiences: Experience[] = [
       "Kubernetes",
       "Azure",
     ],
-    clients: ["Dhisco Revamp", "AOS", "NEXO", "Juniper"],
   },
   {
     role: "Senior Software Engineer",
@@ -52,9 +51,9 @@ export const experiences: Experience[] = [
     end: "Dec 2023",
     location: "Colombo, Sri Lanka",
     summary:
-      "Delivered production-grade hotel & travel-tech integrations and platform engineering work that became the foundation for later AI initiatives.",
+      "Delivered production-grade hospitality & travel-tech integrations and platform engineering work that became the foundation for later AI initiatives.",
     highlights: [
-      "Delivered H2H integrations (Expedia, Webbeds, Umrahme, Juniper) covering full lifecycle flows — search, book, cancel, lookup",
+      "Delivered host-to-host integrations across multiple major hospitality distribution partners covering full lifecycle flows — search, book, cancel, lookup",
       "Led MySQL migration across DEV/QA/STG/PROD with under 5 minutes of production downtime; introduced HikariCP, materialized tables, stored procedures — improved critical query performance by ~40%",
       "Architected the intelligent room-mapping system, rebook flow and Tritium Analytics Data Warehouse — laid the foundation for downstream ML/AI use cases",
       "Designed a distributed Redis caching solution with percentile-based prepopulation and tiered refresh — a pattern later reused for LLM inference caching",
@@ -69,7 +68,6 @@ export const experiences: Experience[] = [
       "Python",
       "Shell",
     ],
-    clients: ["Expedia", "Webbeds", "Umrahme", "Juniper"],
   },
   {
     role: "Software Engineer",

@@ -21,8 +21,8 @@ export const heroMetrics: Metric[] = [
   {
     value: 60,
     suffix: "%",
-    label: "Fewer redundant API calls (Dhisco)",
-    source: "CodeGen / Dhisco",
+    label: "Fewer redundant API calls (LLM cancellation pipeline)",
+    source: "CodeGen",
   },
   {
     value: 53,
