@@ -77,7 +77,7 @@ export default async function Image() {
             fontSize: 24,
           }}
         >
-          <div>Tech Lead & AI Engineer · Codegen International</div>
+          <div>AI & Platform Engineering · CodeGen International</div>
           <div>gayashankariyawasam.github.io</div>
         </div>
       </div>

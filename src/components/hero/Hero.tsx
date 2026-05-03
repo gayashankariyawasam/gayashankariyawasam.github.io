@@ -48,7 +48,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-8 max-w-2xl text-balance text-base text-text-muted sm:text-lg"
         >
-          I&apos;m <span className="text-text">{profile.name}</span> — {profile.role} at{" "}
+          I&apos;m <span className="text-text">{profile.name}</span> — leading{" "}
+          <span className="text-text">AI &amp; Platform Engineering</span> at{" "}
           <a
             href={profile.companyUrl}
             target="_blank"
@@ -57,7 +58,11 @@ export function Hero() {
           >
             {profile.company}
           </a>
-          . I help teams ship LLM agents that don&apos;t just demo — they hold up in production.
+          . ~{profile.yearsExperience} years shipping{" "}
+          <span className="text-text">agentic AI</span>,{" "}
+          <span className="text-text">MCP servers</span> and{" "}
+          <span className="text-text">LLM-powered platforms</span> at
+          enterprise scale.
         </motion.p>
 
         <motion.div

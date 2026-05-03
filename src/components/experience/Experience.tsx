@@ -137,6 +137,17 @@ export function Experience() {
                       </span>
                     ))}
                   </div>
+                  {e.clients && e.clients.length > 0 && (
+                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-text-subtle">
+                      <span className="font-mono uppercase tracking-wider">
+                        Clients
+                      </span>
+                      <span className="text-text-subtle">·</span>
+                      <span className="text-text-muted">
+                        {e.clients.join(" · ")}
+                      </span>
+                    </div>
+                  )}
                 </Reveal>
               </li>
             ))}

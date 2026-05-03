@@ -2,32 +2,35 @@ export const profile = {
   name: "Gayashan Kariyawasam",
   shortName: "Gayashan",
   initials: "GK",
-  role: "Tech Lead & AI Engineer",
-  company: "Codegen International",
+  role: "Associate Technical Team Lead — AI & Platform Engineering",
+  shortRole: "Tech Lead — AI & Platform Engineering",
+  company: "CodeGen International",
   companyUrl: "https://codegen.com",
   location: "Colombo, Sri Lanka",
   timezone: "Asia/Colombo",
   email: "gmkariyawasam@gmail.com",
+  yearsExperience: 6,
 
   tagline: "From AI curiosity → AI capability → AI strategy.",
   shortBio:
-    "I help engineering teams turn LLMs into production-grade systems — from agent design and evaluation to enterprise AI architecture and security.",
+    "Tech lead with ~6 years shipping production AI systems — agentic platforms, MCP servers, RAG pipelines and LLM-powered tooling at enterprise scale.",
   longBio:
-    "I'm an AI Engineer and Tech Lead based in Colombo, building LLM-powered products at Codegen International. My focus is the messy middle of enterprise AI: agent design, evaluation harnesses, AI security, and the strategy work that turns prototypes into production. I write the biweekly From Code to AI Strategy newsletter on LinkedIn, and I'm an IEEE-published researcher (computer vision, surveillance).",
+    "I lead AI & Platform Engineering at CodeGen International, where I design, build and ship agentic AI systems end-to-end. My current work centres on a conversational diagnostic platform (IDRP), custom Model Context Protocol servers, RAG pipelines, and LLM-powered enterprise integrations across travel-tech and hospitality. I mentor a team of six senior engineers, hold an IEEE publication in computer vision, and I'm finishing an MSc in Software Architecture at the University of Moratuwa.",
 
   currentlyExploring: [
-    "AI agent evaluation",
-    "LLM security",
-    "Multi-agent orchestration",
+    "Model Context Protocol (MCP) servers",
+    "Agentic AI evaluation",
+    "LLM inference optimization",
+    "AI security & ethical compliance",
   ],
 
   socials: {
-    linkedin: "https://www.linkedin.com/in/gayashan-kariyawasam/",
+    linkedin: "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
     github: "https://github.com/gayashankariyawasam",
     scholar: "https://scholar.google.com/citations?user=arKNy4MAAAAJ&hl=en",
-    ieee: "https://ieeexplore.ieee.org/author/37087239043",
+    ieee: "https://ieeexplore.ieee.org/document/8959600",
     newsletter:
-      "https://www.linkedin.com/newsletters/from-code-to-ai-strategy-7245789442345005056/",
+      "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
     email: "mailto:gmkariyawasam@gmail.com",
   },
 

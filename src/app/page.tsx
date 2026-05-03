@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/nav/Navbar";
 import { Hero } from "@/components/hero/Hero";
+import { MetricsStrip } from "@/components/hero/MetricsStrip";
 import { About } from "@/components/about/About";
 import { Experience } from "@/components/experience/Experience";
 import { Work } from "@/components/work/Work";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <MetricsStrip />
         <About />
         <Experience />
         <Work />

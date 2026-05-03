@@ -1,11 +1,12 @@
 "use client";
 
-import { GraduationCap, Newspaper, Sparkles } from "lucide-react";
+import { GraduationCap, Newspaper, Sparkles, Users } from "lucide-react";
 import { profile } from "@/data/profile";
 import { papers } from "@/data/research";
 import { Reveal } from "@/components/ui/Reveal";
 import { GithubIcon } from "@/components/ui/icons";
 import { LocationCard } from "./LocationCard";
+import { EducationCards } from "./EducationCards";
 
 export function About() {
   const totalCitations = papers.reduce((s, p) => s + p.citations, 0);
@@ -25,7 +26,7 @@ export function About() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3">
           {/* Bio — large card */}
           <Reveal
             delay={0.1}
@@ -121,11 +122,35 @@ export function About() {
                   From Code to AI Strategy
                 </div>
                 <div className="mt-2 text-sm text-text-muted">
-                  Biweekly · LinkedIn
+                  On LinkedIn
                 </div>
               </div>
             </a>
           </Reveal>
+
+          {/* Leading a team of 6 */}
+          <Reveal delay={0.32} className="lg:col-span-2">
+            <div className="glass card-hover relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6">
+              <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-accent-2/15 blur-3xl" />
+              <div className="relative flex items-center gap-2 text-text-muted">
+                <Users className="h-4 w-4" />
+                <span className="text-sm">Leadership</span>
+              </div>
+              <div className="relative">
+                <div className="font-mono text-4xl font-semibold tracking-tighter text-text">
+                  <span className="text-gradient">6</span>{" "}
+                  <span className="text-text-muted">senior engineers</span>
+                </div>
+                <div className="mt-2 text-sm text-text-muted">
+                  mentored across code review, system design, agentic
+                  development &amp; stakeholder communication
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Education — spans full row */}
+          <EducationCards />
         </div>
       </div>
     </section>

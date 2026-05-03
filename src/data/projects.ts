@@ -3,45 +3,98 @@ export type Project = {
   blurb: string;
   description: string;
   year: string;
-  category: "AI" | "Backend" | "Research" | "Web";
+  category: "AI" | "Backend" | "Research" | "Web" | "Platform" | "AR";
   stack: string[];
+  metric?: string;
   links?: { label: string; url: string }[];
   featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    title: "Enterprise AI Agent Platform",
-    blurb: "Multi-agent orchestration for production workflows",
+    title: "IDRP — Intelligent Diagnostic & Resolution Platform",
+    blurb: "Agentic conversational AI for self-service API testing & troubleshooting",
     description:
-      "Architected an LLM agent system that turns business workflows into reliable, observable, evaluable production processes — with guardrails, eval harnesses, and human-in-the-loop checkpoints.",
+      "Led the end-to-end design, development and deployment of an agentic AI platform that lets client-facing teams and QA self-serve API testing, log tracing and integration troubleshooting through a conversational interface. Reduced support escalations by 40%+.",
     year: "2024",
     category: "AI",
-    stack: ["Python", "LangChain", "OpenAI", "FastAPI", "Postgres", "Redis"],
+    metric: "40%+ ↓ support escalations",
+    stack: [
+      "Python",
+      "LangChain",
+      "LangGraph",
+      "Anthropic Claude API",
+      "MCP",
+      "Redis",
+    ],
     featured: true,
   },
   {
-    title: "LLM Evaluation Harness",
-    blurb: "Beyond demos: measuring agent reliability at scale",
+    title: "Custom MCP Servers (Python)",
+    blurb: "Model Context Protocol servers powering AI-assisted dev workflows",
     description:
-      "An internal eval framework for scoring agent outputs across correctness, latency, cost and safety dimensions — the difference between a demo and a deployable system.",
+      "Architected and implemented custom Model Context Protocol servers in Python — an agentic RAG system for API documentation, plus a driver-context server for integration patterns — enabling AI-assisted development across the engineering organisation.",
     year: "2024",
     category: "AI",
-    stack: ["Python", "Pytest", "OpenAI Evals", "Pydantic"],
+    metric: "Org-wide AI dev workflow",
+    stack: ["Python", "MCP", "RAG", "LangChain", "Vector DB"],
     featured: true,
   },
   {
-    title: "Suspicious Activity Detection",
+    title: "LLM Cancellation-Policy Pipeline (Dhisco)",
+    blurb: "Redis-backed LLM inference + prompt engineering for hotel cancellation policies",
+    description:
+      "Engineered an LLM-powered cancellation policy interpretation pipeline for the Dhisco integration with Redis-backed inference caching and prompt-engineering optimization — eliminated ~60% of redundant API calls, reduced p95 search latency by ~30%, and cut LLM inference costs while preserving accuracy.",
+    year: "2024",
+    category: "AI",
+    metric: "60% ↓ API calls · 30% ↓ p95 latency",
+    stack: ["Python", "OpenAI", "Redis", "Prompt Engineering"],
+    featured: true,
+  },
+  {
+    title: "Tritium OPS Tool",
+    blurb: "Deployment governance, audit trails, GitOps & Jira integration",
+    description:
+      "Initiated and led the Tritium OPS Tool — a governed change-management layer for production AI and platform systems with deployment governance, audit trails, approval workflows, GitOps and Jira integration, and an admin dashboard.",
+    year: "2024",
+    category: "Platform",
+    metric: "Governed production change layer",
+    stack: ["Java", "Spring Boot", "GitOps", "Jira API", "Angular"],
+    featured: true,
+  },
+  {
+    title: "H2H Hotel Integrations",
+    blurb: "Production-grade integrations across major hospitality providers",
+    description:
+      "Delivered H2H integrations covering full lifecycle flows — search, book, cancel, lookup — across Expedia, Webbeds, Umrahme and Juniper, with production-grade reliability and observability.",
+    year: "2023",
+    category: "Backend",
+    metric: "4 major hospitality providers",
+    stack: ["Java", "Spring", "REST APIs", "MySQL"],
+  },
+  {
+    title: "Distributed Redis Caching",
+    blurb: "Percentile-based prepopulation + tiered refresh — later reused for LLM inference",
+    description:
+      "Designed a distributed Redis caching solution with percentile-based prepopulation and tiered refresh intervals, improving cache hit rates by keeping high-demand data warm based on access-pattern analytics. The pattern was later reused for LLM inference caching.",
+    year: "2023",
+    category: "Backend",
+    metric: "Pattern reused for LLM inference",
+    stack: ["Java", "Redis", "HikariCP", "Analytics"],
+  },
+  {
+    title: "Suspicious Activity Detection in Surveillance Footage",
     blurb: "IEEE-published computer vision research (53+ citations)",
     description:
-      "Final-year research published at the IEEE International Conference on Electrical and Computing Technologies (2019). Detects anomalous behavior in surveillance footage using deep learning.",
+      "Co-author of an ICECTA 2019 paper detecting anomalous behaviour in surveillance footage using deep learning. Presented at the International Conference on Electrical and Computing Technologies and Applications, Ras Al Khaimah, UAE.",
     year: "2019",
     category: "Research",
+    metric: "53+ citations · IEEE Xplore",
     stack: ["Python", "TensorFlow", "OpenCV", "Computer Vision"],
     links: [
       {
-        label: "IEEE Xplore",
-        url: "https://ieeexplore.ieee.org/author/37087239043",
+        label: "IEEE Xplore (DOI)",
+        url: "https://ieeexplore.ieee.org/document/8959600",
       },
       {
         label: "Google Scholar",
@@ -51,48 +104,26 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "From Code to AI Strategy",
-    blurb: "Biweekly LinkedIn newsletter on enterprise AI",
+    title: "HoloLens AR — IFS Spectator View",
+    blurb: "Microsoft HoloLens features + Digital Twin IoT prototype at IFS",
     description:
-      "Writing about the shift from AI curiosity → AI capability → AI strategy: agent design, evaluation, security, and the organizational work it takes to ship.",
-    year: "2024–Present",
+      "Built Spectator View Pro and Spectator View Mobile features for Microsoft HoloLens at IFS R&D, upgraded the IFS HoloLens API to support IFS Application 10, and prototyped a Digital Twin integration via Raspberry Pi connecting IoT devices to the IFS IoT Business Connector.",
+    year: "2019",
+    category: "AR",
+    stack: ["Unity 3D", "C#", "HoloLens", "ASP.NET Core", "Python", "OData"],
+  },
+  {
+    title: "From Code to AI Strategy",
+    blurb: "Writing on the shift from AI curiosity to enterprise capability",
+    description:
+      "A regular on-platform write-up on agent design, evaluation, security and the organisational work it takes to turn AI prototypes into production systems.",
+    year: "Ongoing",
     category: "Web",
-    stack: ["Writing", "LinkedIn", "Newsletter"],
+    stack: ["Writing", "LinkedIn"],
     links: [
       {
         label: "Read on LinkedIn",
-        url: "https://www.linkedin.com/in/gayashan-kariyawasam/",
-      },
-    ],
-    featured: true,
-  },
-  {
-    title: "Dispensary Management System",
-    blurb: "Enterprise Java patient & inventory system",
-    description:
-      "Full-stack desktop application for clinic operations — patient records, prescriptions, inventory, billing — built with JavaFX and Hibernate.",
-    year: "2018",
-    category: "Backend",
-    stack: ["Java", "JavaFX", "Hibernate", "MySQL"],
-    links: [
-      {
-        label: "GitHub",
-        url: "https://github.com/gayashankariyawasam/Dispensary-Management-System",
-      },
-    ],
-  },
-  {
-    title: "NYSE Data Warehouse (SSIS)",
-    blurb: "ETL pipeline for stock market analytics",
-    description:
-      "Built a star-schema data warehouse for NYSE end-of-day data with SSIS pipelines, fact/dimension modeling and OLAP queries.",
-    year: "2018",
-    category: "Backend",
-    stack: ["SQL Server", "SSIS", "Data Warehousing", "ETL"],
-    links: [
-      {
-        label: "GitHub",
-        url: "https://github.com/gayashankariyawasam/NYSE_Data_Warehouse_SSIS_Project",
+        url: "https://www.linkedin.com/in/gayashan-kariyawasam-826001160/",
       },
     ],
   },

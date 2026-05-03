@@ -19,26 +19,40 @@ const geistMono = Geist_Mono({
 });
 
 const description =
-  "Gayashan Kariyawasam — Tech Lead & AI Engineer at Codegen International. LLM architecture, AI agent design, evaluation, security, and enterprise AI strategy. Based in Colombo, Sri Lanka. IEEE-published researcher.";
+  "Gayashan Kariyawasam — Associate Technical Team Lead (AI & Platform Engineering) at CodeGen International. ~6 years building agentic AI systems, MCP servers, RAG pipelines and LLM-powered platforms for travel-tech and hospitality. IEEE-published. Colombo, Sri Lanka.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
   title: {
-    default: `${profile.name} — AI Engineer & Tech Lead`,
+    default: `${profile.name} — AI & Platform Engineering Tech Lead`,
     template: `%s · ${profile.name}`,
   },
   description,
   keywords: [
     "Gayashan Kariyawasam",
     "AI Engineer",
-    "Tech Lead",
-    "Codegen International",
+    "Technical Team Lead",
+    "CodeGen International",
+    "Agentic AI",
+    "Generative AI",
+    "MCP Servers",
+    "Model Context Protocol",
+    "LangChain",
+    "LangGraph",
+    "LangSmith",
+    "RAG Pipelines",
+    "Retrieval-Augmented Generation",
     "LLM Architecture",
     "AI Agents",
     "AI Security",
+    "Anthropic Claude",
+    "Claude Code",
     "Enterprise AI Strategy",
+    "Hospitality Tech",
+    "Travel Tech",
     "Sri Lanka",
     "University of Moratuwa",
+    "SLIIT",
   ],
   authors: [{ name: profile.name, url: profile.siteUrl }],
   creator: profile.name,
@@ -47,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: profile.siteUrl,
-    title: `${profile.name} — AI Engineer & Tech Lead`,
+    title: `${profile.name} — AI & Platform Engineering Tech Lead`,
     description,
     siteName: profile.name,
     locale: "en_US",
@@ -58,13 +72,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${profile.name} — AI Engineer & Tech Lead`,
+        alt: `${profile.name} — AI & Platform Engineering Tech Lead`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — AI Engineer & Tech Lead`,
+    title: `${profile.name} — AI & Platform Engineering Tech Lead`,
     description,
     images: ["/opengraph-image"],
   },
