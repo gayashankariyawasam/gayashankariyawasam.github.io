@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# gayashankariyawasam.github.io
 
-## Getting Started
+Personal portfolio for **Gayashan Kariyawasam** — Tech Lead & AI Engineer at Codegen International.
 
-First, run the development server:
+Live at <https://gayashankariyawasam.github.io>.
+
+## Stack
+
+- [Next.js 16](https://nextjs.org) (App Router, TypeScript, static export)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [GSAP + ScrollTrigger](https://gsap.com) for scroll-driven sequences
+- [Motion](https://motion.dev) for component-level animation
+- [Three.js + React Three Fiber + drei](https://r3f.docs.pmnd.rs) for the hero scene
+- [Lenis](https://lenis.darkroom.engineering) for smooth scroll
+- [lucide-react](https://lucide.dev) for icons
+- Hosted on **GitHub Pages** via GitHub Actions
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # static export → out/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Push to `main` — the workflow at `.github/workflows/deploy.yml` builds and deploys to GitHub Pages automatically.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing content
 
-## Learn More
+All editable copy lives in `src/data/`:
 
-To learn more about Next.js, take a look at the following resources:
+- `profile.ts` — name, role, bio, socials
+- `experience.ts` — timeline entries
+- `projects.ts` — selected work cards
+- `research.ts` — papers and newsletter
+- `stack.ts` — tech stack rows
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© Gayashan Kariyawasam. Code is MIT, content is reserved.

@@ -1,0 +1,11 @@
+/* TEAM */
+Name:     Gayashan Kariyawasam
+Role:     Tech Lead & AI Engineer
+Site:     https://gayashankariyawasam.github.io
+Github:   gayashankariyawasam
+Linkedin: gayashan-kariyawasam
+Location: Colombo, Sri Lanka
+
+/* SITE */
+Built with: Next.js, TypeScript, Tailwind CSS, GSAP, Motion, Three.js
+Hosted on:  GitHub Pages
