@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 const description =
-  "Gayashan Kariyawasam — Associate Technical Team Lead (AI & Platform Engineering) at CodeGen International. ~6 years building agentic AI systems, MCP servers, RAG pipelines and LLM-powered platforms for travel-tech and hospitality. IEEE-published. Colombo, Sri Lanka.";
+  "AI & Platform Engineering Tech Lead at CodeGen International. IEEE-published, MSc Software Architecture. Building agentic AI, MCP servers, RAG pipelines.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
@@ -87,9 +87,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  manifest: "/manifest.webmanifest",
   category: "technology",
 };
 

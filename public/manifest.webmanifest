@@ -1,0 +1,19 @@
+{
+  "name": "Gayashan Kariyawasam — AI & Platform Engineering Tech Lead",
+  "short_name": "Gayashan K.",
+  "description": "AI & Platform Engineering Tech Lead at CodeGen International. IEEE-published, MSc Software Architecture. Building agentic AI, MCP servers, RAG pipelines.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#07070b",
+  "theme_color": "#07070b",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

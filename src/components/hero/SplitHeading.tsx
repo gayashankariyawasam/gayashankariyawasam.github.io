@@ -9,10 +9,9 @@ const word: Variants = {
 };
 
 const char: Variants = {
-  hidden: { y: "110%", opacity: 0 },
+  hidden: { y: "110%" },
   show: {
     y: 0,
-    opacity: 1,
     transition: { duration: 0.7, ease: [0.2, 0.8, 0.2, 1] },
   },
 };
