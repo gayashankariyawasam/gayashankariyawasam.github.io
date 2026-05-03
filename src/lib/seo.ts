@@ -70,12 +70,19 @@ export function personJsonLd() {
 }
 
 export function websiteJsonLd() {
+  const person = {
+    "@type": "Person",
+    name: profile.name,
+    url: profile.siteUrl,
+  } as const;
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: `${profile.name} — Portfolio`,
+    name: profile.name,
+    alternateName: "gayashankariyawasam.github.io",
     url: profile.siteUrl,
     inLanguage: "en",
-    author: { "@type": "Person", name: profile.name },
+    author: person,
+    publisher: person,
   } as const;
 }

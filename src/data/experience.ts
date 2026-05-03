@@ -15,7 +15,7 @@ export const experiences: Experience[] = [
   {
     role: "Associate Technical Team Lead — AI & Platform Engineering",
     company: "CodeGen International",
-    companyUrl: "https://codegen.com",
+    companyUrl: "https://codegen.co.uk",
     start: "Jan 2024",
     end: "Present",
     location: "Colombo, Sri Lanka",
@@ -46,7 +46,7 @@ export const experiences: Experience[] = [
   {
     role: "Senior Software Engineer",
     company: "CodeGen International",
-    companyUrl: "https://codegen.com",
+    companyUrl: "https://codegen.co.uk",
     start: "Jan 2023",
     end: "Dec 2023",
     location: "Colombo, Sri Lanka",
@@ -72,7 +72,7 @@ export const experiences: Experience[] = [
   {
     role: "Software Engineer",
     company: "CodeGen International",
-    companyUrl: "https://codegen.com",
+    companyUrl: "https://codegen.co.uk",
     start: "Nov 2020",
     end: "Dec 2022",
     location: "Colombo, Sri Lanka",

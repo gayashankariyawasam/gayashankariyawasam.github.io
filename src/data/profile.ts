@@ -5,7 +5,7 @@ export const profile = {
   role: "Associate Technical Team Lead — AI & Platform Engineering",
   shortRole: "Tech Lead — AI & Platform Engineering",
   company: "CodeGen International",
-  companyUrl: "https://codegen.com",
+  companyUrl: "https://codegen.co.uk",
   location: "Colombo, Sri Lanka",
   timezone: "Asia/Colombo",
   yearsExperience: 6,
