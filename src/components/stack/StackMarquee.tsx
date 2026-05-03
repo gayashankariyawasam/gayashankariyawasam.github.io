@@ -21,7 +21,6 @@ export function StackMarquee() {
 
       <div className="relative space-y-6">
         {stack.map((row, ri) => {
-          const items = [...row.items, ...row.items];
           const direction = ri % 2 === 0 ? "" : "[animation-direction:reverse]";
           return (
             <div key={row.category} className="marquee group/marq">
@@ -34,7 +33,7 @@ export function StackMarquee() {
                 <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-bg to-transparent" />
                 <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-bg to-transparent" />
                 <div className={`marquee-track flex w-max gap-3 ${direction}`}>
-                  {items.map((item, i) => (
+                  {row.items.map((item, i) => (
                     <span
                       key={`${row.category}-${item}-${i}`}
                       className="shrink-0 rounded-2xl border border-border bg-surface/50 px-5 py-3 text-sm text-text-muted backdrop-blur transition-colors hover:border-border-strong hover:text-text"
@@ -42,6 +41,16 @@ export function StackMarquee() {
                       {item}
                     </span>
                   ))}
+                  <div aria-hidden="true" className="contents">
+                    {row.items.map((item, i) => (
+                      <span
+                        key={`${row.category}-${item}-dup-${i}`}
+                        className="shrink-0 rounded-2xl border border-border bg-surface/50 px-5 py-3 text-sm text-text-muted backdrop-blur transition-colors hover:border-border-strong hover:text-text"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

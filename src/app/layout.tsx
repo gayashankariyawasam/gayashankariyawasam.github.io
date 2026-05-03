@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     lastName: "Kariyawasam",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: `${profile.name} — AI & Platform Engineering Tech Lead`,
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${profile.name} — AI & Platform Engineering Tech Lead`,
     description,
-    images: ["/opengraph-image"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -88,6 +88,10 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   manifest: "/manifest.webmanifest",
+  verification: {
+    // Replace with the token from Google Search Console (Settings → Ownership → HTML tag)
+    google: "REPLACE_WITH_GOOGLE_SITE_VERIFICATION_TOKEN",
+  },
   category: "technology",
 };
 

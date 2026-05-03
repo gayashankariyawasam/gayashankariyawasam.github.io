@@ -38,13 +38,6 @@ jobs:
       - name: Disable Jekyll
         run: touch out/.nojekyll
 
-      - name: Fix OG image MIME (rename to .png and update HTML refs)
-        run: |
-          if [ -f out/opengraph-image ]; then
-            cp out/opengraph-image out/opengraph-image.png
-            find out -name "*.html" -exec sed -i 's|/opengraph-image"|/opengraph-image.png"|g; s|/opengraph-image?|/opengraph-image.png?|g' {} +
-          fi
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
