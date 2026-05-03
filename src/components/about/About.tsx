@@ -1,6 +1,15 @@
 "use client";
 
-import { GraduationCap, Newspaper, Sparkles, Users } from "lucide-react";
+import {
+  Compass,
+  GraduationCap,
+  Newspaper,
+  Sparkles,
+  Sprout,
+  Target,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { profile } from "@/data/profile";
 import { papers } from "@/data/research";
 import { Reveal } from "@/components/ui/Reveal";
@@ -128,24 +137,52 @@ export function About() {
             </a>
           </Reveal>
 
-          {/* Leading a team of 6 */}
+          {/* Leadership pillars */}
           <Reveal delay={0.32} className="lg:col-span-2">
-            <div className="glass card-hover relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6">
+            <div className="glass card-hover relative flex h-full flex-col gap-5 overflow-hidden rounded-3xl p-6">
               <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-accent-2/15 blur-3xl" />
               <div className="relative flex items-center gap-2 text-text-muted">
                 <Users className="h-4 w-4" />
                 <span className="text-sm">Leadership</span>
               </div>
-              <div className="relative">
-                <div className="font-mono text-4xl font-semibold tracking-tighter text-text">
-                  <span className="text-gradient">6</span>{" "}
-                  <span className="text-text-muted">senior engineers</span>
-                </div>
-                <div className="mt-2 text-sm text-text-muted">
-                  mentored across code review, system design, agentic
-                  development &amp; stakeholder communication
-                </div>
-              </div>
+              <ul className="relative grid grid-cols-2 gap-x-4 gap-y-4">
+                {[
+                  {
+                    icon: Sprout,
+                    verb: "Mentor",
+                    line: "Growing engineers through code review, system design and agentic development",
+                  },
+                  {
+                    icon: Compass,
+                    verb: "Architect",
+                    line: "Setting architectural direction and AI engineering standards",
+                  },
+                  {
+                    icon: Target,
+                    verb: "Align",
+                    line: "Translating business goals into reliable engineering execution",
+                  },
+                  {
+                    icon: TrendingUp,
+                    verb: "Influence",
+                    line: "Driving org-wide adoption of agentic dev tooling and best practices",
+                  },
+                ].map(({ icon: Icon, verb, line }) => (
+                  <li key={verb} className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-bg/40">
+                        <Icon className="h-3.5 w-3.5 text-accent-2" />
+                      </span>
+                      <span className="font-mono text-xs uppercase tracking-[0.18em] text-text">
+                        {verb}
+                      </span>
+                    </div>
+                    <p className="text-xs leading-snug text-text-muted">
+                      {line}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
 
