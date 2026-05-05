@@ -26,7 +26,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
+      className="relative flex min-h-[100svh] w-full items-center justify-center overflow-x-clip"
     >
       <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
       {show3D && (
@@ -37,7 +37,7 @@ export function Hero() {
 
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-bg via-bg/60 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-6 pt-32 pb-20 text-center">
+      <div className="hero-content relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-6 pt-32 pb-20 text-center">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export function Hero() {
         <SplitHeading
           text="From AI curiosity → AI capability → AI strategy."
           highlight={["curiosity", "capability", "strategy"]}
-          className="text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-text sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+          className="hero-heading text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-text sm:text-6xl md:text-7xl lg:text-[5.5rem]"
         />
 
         <motion.p

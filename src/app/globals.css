@@ -151,6 +151,21 @@ section {
   animation-play-state: paused;
 }
 
+/* Short-viewport laptops (≤ ~820px tall): shrink hero so the badge, heading
+   and CTA buttons all fit without the flex-centered block overflowing the
+   viewport. The `lg:text-[5.5rem]` heading at 88px is the main offender on
+   1366×768 / scaled 1080p laptops. */
+@media (max-height: 820px) {
+  .hero-content {
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+  .hero-heading {
+    font-size: clamp(2.25rem, 8vh, 4rem);
+    line-height: 1.05;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
