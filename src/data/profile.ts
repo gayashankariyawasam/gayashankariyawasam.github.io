@@ -28,6 +28,7 @@ export const profile = {
     github: "https://github.com/gayashankariyawasam",
     scholar: "https://scholar.google.com/citations?user=arKNy4MAAAAJ&hl=en",
     ieee: "https://ieeexplore.ieee.org/document/8959600",
+    ieeeAuthor: "https://ieeexplore.ieee.org/author/37087239043",
     newsletter:
       "https://www.linkedin.com/newsletters/from-code-to-ai-strategy-7439360032959524865/",
   },

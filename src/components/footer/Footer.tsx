@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { profile } from "@/data/profile";
 import { KonamiTerminal } from "./KonamiTerminal";
 
@@ -13,6 +14,9 @@ export function Footer() {
         </div>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-text-subtle">
           <span className="font-mono">↑ ↑ ↓ ↓ ← → ← → B A</span>
+          <Link href="/about/" className="hover:text-text">
+            About
+          </Link>
           <a
             href={profile.socials.github}
             target="_blank"

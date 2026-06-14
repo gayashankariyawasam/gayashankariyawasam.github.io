@@ -1,17 +1,39 @@
 import { profile } from "@/data/profile";
 
+// Stable, domain-owned identifiers so every page references the same entity.
+const PERSON_ID = `${profile.siteUrl}/#person`;
+const WEBSITE_ID = `${profile.siteUrl}/#website`;
+
 export function personJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": PERSON_ID,
     name: profile.name,
+    givenName: "Gayashan",
+    familyName: "Kariyawasam",
+    alternateName: "gayashankariyawasam",
     url: profile.siteUrl,
+    mainEntityOfPage: profile.siteUrl,
     image: `${profile.siteUrl}/portrait.jpg`,
     jobTitle: profile.role,
+    description: profile.shortBio,
+    // Separates this Gayashan Kariyawasam from others sharing the surname.
+    disambiguatingDescription:
+      "AI & Platform Engineering Tech Lead at CodeGen International in Colombo, Sri Lanka — IEEE-published computer-vision researcher building agentic AI, MCP servers and RAG pipelines.",
     worksFor: {
       "@type": "Organization",
       name: profile.company,
       url: profile.companyUrl,
+    },
+    nationality: { "@type": "Country", name: "Sri Lanka" },
+    homeLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Colombo",
+        addressCountry: "LK",
+      },
     },
     address: {
       "@type": "PostalAddress",
@@ -60,30 +82,43 @@ export function personJsonLd() {
       "Microservices",
       "Distributed Caching",
     ],
+    // Add the ORCID and Wikidata URLs here once those profiles exist — they are
+    // the highest-leverage additions for entity recognition.
     sameAs: [
       profile.socials.linkedin,
       profile.socials.github,
       profile.socials.scholar,
       profile.socials.ieee,
+      profile.socials.ieeeAuthor,
       profile.socials.newsletter,
     ],
   } as const;
 }
 
 export function websiteJsonLd() {
-  const person = {
-    "@type": "Person",
-    name: profile.name,
-    url: profile.siteUrl,
-  } as const;
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
     name: profile.name,
     alternateName: "gayashankariyawasam.github.io",
     url: profile.siteUrl,
     inLanguage: "en",
-    author: person,
-    publisher: person,
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": PERSON_ID },
+  } as const;
+}
+
+export function profilePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${profile.siteUrl}/about/#profilepage`,
+    url: `${profile.siteUrl}/about/`,
+    name: `About ${profile.name}`,
+    inLanguage: "en",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": PERSON_ID },
+    mainEntity: { "@id": PERSON_ID },
   } as const;
 }

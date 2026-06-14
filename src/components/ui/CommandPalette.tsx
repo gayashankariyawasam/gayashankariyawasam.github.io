@@ -51,6 +51,9 @@ export function CommandPalette() {
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
       history.replaceState(null, "", hash);
+    } else {
+      // Section isn't on this page (e.g. /about) — jump to the home anchor.
+      window.location.href = `/${hash}`;
     }
   }, []);
 
