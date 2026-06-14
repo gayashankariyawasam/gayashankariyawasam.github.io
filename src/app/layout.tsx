@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/profile";
 import { personJsonLd, websiteJsonLd } from "@/lib/seo";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { Cursor } from "@/components/ui/Cursor";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +16,15 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Distinctive display face for headings — geometric grotesk that reads
+// "technical but designed", pairs with Geist for body copy.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -107,7 +117,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -120,9 +130,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
         />
       </head>
-      <body className="bg-bg text-text antialiased">
+      <body className="bg-bg text-text antialiased" suppressHydrationWarning>
         <SmoothScroll />
         <Cursor />
+        <CommandPalette />
         {children}
       </body>
     </html>

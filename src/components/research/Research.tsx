@@ -22,7 +22,7 @@ export function Research() {
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           {papers.map((p) => (
-            <Reveal key={p.title} className="lg:col-span-2">
+            <Reveal key={p.title} variant="left" className="lg:col-span-2">
               <article className="glass card-hover relative overflow-hidden rounded-3xl p-8">
                 <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/15 blur-3xl" />
                 <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-accent-2/15 blur-3xl" />
@@ -71,7 +71,7 @@ export function Research() {
           ))}
 
           {newsletterPosts.map((post) => (
-            <Reveal key={post.url} delay={0.1}>
+            <Reveal key={post.url} delay={0.1} variant="right">
               <a
                 href={post.url}
                 target="_blank"

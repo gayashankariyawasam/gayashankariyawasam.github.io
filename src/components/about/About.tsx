@@ -186,6 +186,27 @@ export function About() {
             </div>
           </Reveal>
 
+          {/* Portrait — duotone, fills the row-3 gap beside Leadership */}
+          <Reveal delay={0.34} variant="scale" className="lg:col-span-2">
+            <div className="group relative h-full min-h-[240px] overflow-hidden rounded-3xl border border-border">
+              <img
+                src="/portrait.jpg"
+                alt={`${profile.name} — ${profile.shortRole}`}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover object-top grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
+              />
+              {/* Accent duotone tint, fades out on hover to reveal true color */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/40 via-transparent to-accent-2/30 opacity-70 mix-blend-color transition-opacity duration-700 group-hover:opacity-0" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6">
+                <div className="font-display text-lg font-semibold tracking-tight text-white">
+                  {profile.name}
+                </div>
+                <div className="text-sm text-text-muted">{profile.shortRole}</div>
+              </div>
+            </div>
+          </Reveal>
+
           {/* Education — spans full row */}
           <EducationCards />
         </div>

@@ -1,9 +1,9 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
 import { projects } from "@/data/projects";
 import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
 import { cn } from "@/lib/utils";
 
 const accentForCategory: Record<string, string> = {
@@ -36,13 +36,10 @@ export function Work() {
               <Reveal
                 key={p.title}
                 delay={(i % 4) * 0.06}
+                variant={isWide ? "scale" : i % 2 === 0 ? "left" : "right"}
                 className={cn(isWide && "md:col-span-2")}
               >
-                <motion.article
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-                  className="group relative h-full overflow-hidden rounded-3xl border border-border bg-surface/40 p-6 backdrop-blur-sm sm:p-8"
-                >
+                <TiltCard className="group relative overflow-hidden rounded-3xl border border-border bg-surface/40 p-6 backdrop-blur-sm sm:p-8">
                   <div
                     className={cn(
                       "pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100",
@@ -50,10 +47,10 @@ export function Work() {
                     )}
                   />
                   <div
-                    className="pointer-events-none absolute inset-px rounded-3xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-px rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
                       background:
-                        "radial-gradient(600px circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,0.05), transparent 40%)",
+                        "radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08), transparent 45%)",
                     }}
                   />
 
@@ -102,7 +99,7 @@ export function Work() {
                       )}
                     </div>
                   </div>
-                </motion.article>
+                </TiltCard>
               </Reveal>
             );
           })}

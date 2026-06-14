@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { OPEN_TERMINAL_EVENT } from "@/components/ui/CommandPalette";
 
 const KONAMI = [
   "ArrowUp",
@@ -96,6 +97,13 @@ export function KonamiTerminal() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [buffer]);
+
+  // Also openable from the command palette ("Launch gk-os terminal").
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_TERMINAL_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_TERMINAL_EVENT, onOpen);
+  }, []);
 
   return (
     <AnimatePresence>

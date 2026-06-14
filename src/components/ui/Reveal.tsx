@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { motion, type Variant, type Variants } from "motion/react";
 import type { ReactNode } from "react";
+
+type RevealVariant = "up" | "left" | "right" | "scale" | "blur";
 
 type Props = {
   children: ReactNode;
@@ -9,27 +11,46 @@ type Props = {
   y?: number;
   className?: string;
   as?: "div" | "span" | "li";
+  /** Choreography preset — vary across sections so reveals don't feel uniform. */
+  variant?: RevealVariant;
 };
 
-const variants: Variants = {
-  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.7, ease: [0.2, 0.8, 0.2, 1] },
-  },
-};
+const ease = [0.2, 0.8, 0.2, 1] as const;
 
-export function Reveal({ children, delay = 0, y, className, as = "div" }: Props) {
+const hiddenByVariant = {
+  up: { opacity: 0, y: 24, filter: "blur(8px)" },
+  left: { opacity: 0, x: -40, filter: "blur(6px)" },
+  right: { opacity: 0, x: 40, filter: "blur(6px)" },
+  scale: { opacity: 0, scale: 0.92, filter: "blur(8px)" },
+  blur: { opacity: 0, filter: "blur(14px)" },
+} satisfies Record<RevealVariant, Variant>;
+
+export function Reveal({
+  children,
+  delay = 0,
+  y,
+  className,
+  as = "div",
+  variant = "up",
+}: Props) {
   const MotionTag = motion[as] as typeof motion.div;
-  const customVariants: Variants =
-    y !== undefined
-      ? {
-          hidden: { ...variants.hidden, y },
-          show: variants.show,
-        }
-      : variants;
+
+  const hidden =
+    y !== undefined && variant === "up"
+      ? { ...hiddenByVariant.up, y }
+      : hiddenByVariant[variant];
+
+  const variants: Variants = {
+    hidden,
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: { duration: 0.7, ease },
+    },
+  };
 
   return (
     <MotionTag
@@ -38,7 +59,7 @@ export function Reveal({ children, delay = 0, y, className, as = "div" }: Props)
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
       transition={{ delay }}
-      variants={customVariants}
+      variants={variants}
     >
       {children}
     </MotionTag>

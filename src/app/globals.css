@@ -53,11 +53,31 @@ body {
   overflow-x: hidden;
 }
 
+/* Display face for headlines — Space Grotesk gives the type a distinctive,
+   engineered character instead of the default Geist everywhere. */
+h1,
+h2 {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01" 1, "ss03" 1;
+}
+
 body {
   background-image:
     radial-gradient(at 20% -10%, rgba(139, 92, 246, 0.15), transparent 50%),
     radial-gradient(at 80% 110%, rgba(34, 211, 238, 0.12), transparent 50%);
   background-attachment: fixed;
+}
+
+/* Subtle film grain over the whole page — adds a premium, tactile feel that
+   flat dark backgrounds lack. Pointer-events off, sits above bg, below content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {

@@ -7,20 +7,32 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { profile } from "@/data/profile";
 import { SplitHeading } from "./SplitHeading";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { cn } from "@/lib/utils";
 
 const HeroScene3D = dynamic(() => import("./HeroScene3D"), { ssr: false });
 
 export function Hero() {
   const [show3D, setShow3D] = useState(false);
+  const [wide, setWide] = useState(false);
 
   useEffect(() => {
     // Only render the Three.js scene on tablet+ viewports — gates the dynamic
-    // import so mobile users never download ~290 KB of Three.js + r3f + drei.
+    // import so mobile users never download Three.js + r3f + drei + postprocessing.
     const mq = window.matchMedia("(min-width: 640px)");
-    const update = () => setShow3D(mq.matches);
+    // On large screens the orb sits to the right of a left-aligned headline;
+    // below that the copy centers and the orb floats behind it.
+    const mqWide = window.matchMedia("(min-width: 1024px)");
+    const update = () => {
+      setShow3D(mq.matches);
+      setWide(mqWide.matches);
+    };
     update();
     mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    mqWide.addEventListener("change", update);
+    return () => {
+      mq.removeEventListener("change", update);
+      mqWide.removeEventListener("change", update);
+    };
   }, []);
 
   return (
@@ -31,13 +43,30 @@ export function Hero() {
       <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
       {show3D && (
         <div className="absolute inset-0" aria-hidden>
-          <HeroScene3D />
+          <HeroScene3D align={wide ? "split" : "center"} />
         </div>
       )}
 
+      {/* Legibility scrim — darkens the copy side so the headline reads while the
+          orb keeps glowing on the right (split) or behind it (centered). */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: wide
+            ? "linear-gradient(100deg, rgba(7,7,11,0.92) 0%, rgba(7,7,11,0.6) 38%, rgba(7,7,11,0) 68%)"
+            : "radial-gradient(ellipse 60% 50% at 50% 46%, rgba(7,7,11,0.66), transparent 74%)",
+        }}
+        aria-hidden
+      />
+
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-bg via-bg/60 to-transparent" />
 
-      <div className="hero-content relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-6 pt-32 pb-20 text-center">
+      <div
+        className={cn(
+          "hero-content relative z-10 mx-auto flex w-full max-w-6xl flex-col px-6 pt-32 pb-20",
+          wide ? "items-start text-left" : "items-center text-center"
+        )}
+      >
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +83,7 @@ export function Hero() {
         <SplitHeading
           text="From AI curiosity → AI capability → AI strategy."
           highlight={["curiosity", "capability", "strategy"]}
-          className="hero-heading text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-text sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+          className="hero-heading text-balance font-sans text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-text sm:text-6xl md:text-7xl lg:max-w-3xl lg:text-[5.5rem]"
         />
 
         <motion.p
@@ -84,7 +113,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.65 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+          className={cn(
+            "mt-10 flex flex-wrap items-center gap-3",
+            wide ? "justify-start" : "justify-center"
+          )}
         >
           <Magnetic>
             <a

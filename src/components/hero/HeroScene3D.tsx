@@ -1,64 +1,183 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { Float, Sparkles, Stars } from "@react-three/drei";
+import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
-function Particles({ count = 1800 }: { count?: number }) {
-  const ref = useRef<THREE.Points>(null);
-  const mouse = useRef({ x: 0, y: 0 });
+type Align = "split" | "center";
 
+// Classic 3D Perlin noise (Ashima / Stefan Gustavson) — used for FBM vertex
+// displacement on the orb. Public domain.
+const CNOISE = /* glsl */ `
+vec3 mod289(vec3 x){return x - floor(x * (1.0/289.0)) * 289.0;}
+vec4 mod289(vec4 x){return x - floor(x * (1.0/289.0)) * 289.0;}
+vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+vec3 fade(vec3 t){return t*t*t*(t*(t*6.0-15.0)+10.0);}
+float cnoise(vec3 P){
+  vec3 Pi0 = floor(P); vec3 Pi1 = Pi0 + vec3(1.0);
+  Pi0 = mod289(Pi0); Pi1 = mod289(Pi1);
+  vec3 Pf0 = fract(P); vec3 Pf1 = Pf0 - vec3(1.0);
+  vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+  vec4 iy = vec4(Pi0.yy, Pi1.yy);
+  vec4 iz0 = Pi0.zzzz; vec4 iz1 = Pi1.zzzz;
+  vec4 ixy = permute(permute(ix) + iy);
+  vec4 ixy0 = permute(ixy + iz0); vec4 ixy1 = permute(ixy + iz1);
+  vec4 gx0 = ixy0 * (1.0/7.0);
+  vec4 gy0 = fract(floor(gx0) * (1.0/7.0)) - 0.5;
+  gx0 = fract(gx0);
+  vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+  vec4 sz0 = step(gz0, vec4(0.0));
+  gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+  gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+  vec4 gx1 = ixy1 * (1.0/7.0);
+  vec4 gy1 = fract(floor(gx1) * (1.0/7.0)) - 0.5;
+  gx1 = fract(gx1);
+  vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+  vec4 sz1 = step(gz1, vec4(0.0));
+  gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+  gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+  vec3 g000 = vec3(gx0.x,gy0.x,gz0.x); vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+  vec3 g010 = vec3(gx0.z,gy0.z,gz0.z); vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+  vec3 g001 = vec3(gx1.x,gy1.x,gz1.x); vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+  vec3 g011 = vec3(gx1.z,gy1.z,gz1.z); vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+  vec4 norm0 = taylorInvSqrt(vec4(dot(g000,g000), dot(g010,g010), dot(g100,g100), dot(g110,g110)));
+  g000 *= norm0.x; g010 *= norm0.y; g100 *= norm0.z; g110 *= norm0.w;
+  vec4 norm1 = taylorInvSqrt(vec4(dot(g001,g001), dot(g011,g011), dot(g101,g101), dot(g111,g111)));
+  g001 *= norm1.x; g011 *= norm1.y; g101 *= norm1.z; g111 *= norm1.w;
+  float n000 = dot(g000, Pf0);
+  float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+  float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+  float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+  float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+  float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+  float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+  float n111 = dot(g111, Pf1);
+  vec3 fade_xyz = fade(Pf0);
+  vec4 n_z = mix(vec4(n000,n100,n010,n110), vec4(n001,n101,n011,n111), fade_xyz.z);
+  vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+  float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+  return 2.2 * n_xyz;
+}
+`;
+
+const ORB_VERT = /* glsl */ `
+uniform float uTime;
+uniform float uAmp;
+uniform float uFreq;
+uniform float uHover;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying float vDisp;
+
+${CNOISE}
+
+float fbm(vec3 p){
+  float v = 0.0; float a = 0.5;
+  for(int i=0;i<4;i++){ v += a*cnoise(p); p *= 2.0; a *= 0.5; }
+  return v;
+}
+
+vec3 displaced(vec3 p){
+  float n = fbm(p * uFreq + vec3(0.0, 0.0, uTime * 0.22));
+  return p + normalize(p) * n * (uAmp + uHover * 0.12);
+}
+
+void main(){
+  vec3 nrm = normalize(position);
+  vec3 up = mix(vec3(1.0,0.0,0.0), vec3(0.0,1.0,0.0), step(abs(nrm.y), 0.99));
+  vec3 tangent = normalize(cross(nrm, up));
+  vec3 bitangent = cross(nrm, tangent);
+  float eps = 0.08;
+  vec3 p0 = displaced(position);
+  vec3 p1 = displaced(position + tangent * eps);
+  vec3 p2 = displaced(position + bitangent * eps);
+  vec3 newNormal = normalize(cross(p1 - p0, p2 - p0));
+  if(dot(newNormal, nrm) < 0.0) newNormal = -newNormal;
+  vDisp = length(p0) - length(position);
+  vNormal = normalize(normalMatrix * newNormal);
+  vec4 mv = modelViewMatrix * vec4(p0, 1.0);
+  vPosition = mv.xyz;
+  gl_Position = projectionMatrix * mv;
+}
+`;
+
+const ORB_FRAG = /* glsl */ `
+uniform float uTime;
+uniform float uHover;
+uniform vec3 uColorA;
+uniform vec3 uColorB;
+uniform vec3 uColorRim;
+varying vec3 vNormal;
+varying vec3 vPosition;
+varying float vDisp;
+
+void main(){
+  vec3 N = normalize(vNormal);
+  vec3 V = normalize(-vPosition);
+  float fres = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 2.6);
+
+  // Surface color flows violet -> cyan with the displacement crests.
+  float t = smoothstep(-0.16, 0.22, vDisp);
+  vec3 base = mix(uColorA, uColorB, t);
+
+  // Soft directional shading to read the 3D form, on a glowing floor so the
+  // core reads as lit-from-within even before the cursor energises it.
+  float diff = max(dot(N, normalize(vec3(0.5, 0.7, 0.9))), 0.0);
+  vec3 col = base * (0.45 + 0.7 * diff);
+  col += base * 0.2; // inner self-glow
+
+  // Bright energy rim (feeds the bloom), intensifies near the cursor.
+  col += uColorRim * fres * (2.2 + uHover * 1.1);
+
+  // Subtle breathing pulse.
+  col *= 0.95 + 0.08 * sin(uTime * 1.4);
+
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+/** Colored haze sitting behind the orb for depth. */
+function Nebula() {
+  const ref = useRef<THREE.Points>(null);
   const { positions, colors } = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
+    const COUNT = 1600;
+    const positions = new Float32Array(COUNT * 3);
+    const colors = new Float32Array(COUNT * 3);
     const c1 = new THREE.Color("#8b5cf6");
     const c2 = new THREE.Color("#22d3ee");
-    for (let i = 0; i < count; i++) {
-      const r = Math.cbrt(Math.random()) * 8 + 1.5;
+    for (let i = 0; i < COUNT; i++) {
+      const r = 10 + Math.random() * 12;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      positions[i * 3 + 0] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = r * Math.cos(phi);
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.7;
+      positions[i * 3 + 2] = -Math.abs(r * Math.cos(phi)) * 0.6 - 3;
       const m = c1.clone().lerp(c2, Math.random());
-      colors[i * 3 + 0] = m.r;
+      colors[i * 3] = m.r;
       colors[i * 3 + 1] = m.g;
       colors[i * 3 + 2] = m.b;
     }
     return { positions, colors };
-  }, [count]);
+  }, []);
 
-  useFrame((state, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.y += delta * 0.05;
-    ref.current.rotation.x += delta * 0.02;
-    const tx = mouse.current.x * 0.4;
-    const ty = -mouse.current.y * 0.4;
-    ref.current.position.x += (tx - ref.current.position.x) * 0.04;
-    ref.current.position.y += (ty - ref.current.position.y) * 0.04;
-    state.camera.position.z = 6 + Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
+  useFrame((_, d) => {
+    if (ref.current) ref.current.rotation.z += d * 0.008;
   });
 
   return (
-    <points
-      ref={ref}
-      onPointerMove={(e) => {
-        mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse.current.y = (e.clientY / window.innerHeight) * 2 - 1;
-      }}
-    >
+    <points ref={ref}>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.035}
+        size={0.06}
         vertexColors
         transparent
-        opacity={0.85}
+        opacity={0.55}
         depthWrite={false}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
@@ -67,16 +186,155 @@ function Particles({ count = 1800 }: { count?: number }) {
   );
 }
 
-export default function HeroScene3D() {
+/** The glowing "intelligence core" — custom FBM-displaced shader sphere. */
+function Orb({
+  reduced,
+  matRef,
+}: {
+  reduced: boolean;
+  matRef: React.RefObject<THREE.ShaderMaterial | null>;
+}) {
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uAmp: { value: reduced ? 0.16 : 0.34 },
+      uFreq: { value: 1.15 },
+      uHover: { value: 0 },
+      uColorA: { value: new THREE.Color("#3a1d8a") },
+      uColorB: { value: new THREE.Color("#22d3ee") },
+      uColorRim: { value: new THREE.Color("#a5f0ff") },
+    }),
+    [reduced]
+  );
+
+  return (
+    <group>
+      {/* Additive outer halo */}
+      <mesh scale={1.32}>
+        <sphereGeometry args={[1.45, 48, 48]} />
+        <meshBasicMaterial
+          color="#22d3ee"
+          transparent
+          opacity={0.09}
+          side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+      {/* Core */}
+      <mesh>
+        <icosahedronGeometry args={[1.45, 24]} />
+        <shaderMaterial
+          ref={matRef}
+          vertexShader={ORB_VERT}
+          fragmentShader={ORB_FRAG}
+          uniforms={uniforms}
+        />
+      </mesh>
+      {!reduced && (
+        <Sparkles count={46} scale={5.5} size={2.4} speed={0.25} color="#9be8ff" />
+      )}
+    </group>
+  );
+}
+
+function Scene({ align, reduced }: { align: Align; reduced: boolean }) {
+  const groupRef = useRef<THREE.Group>(null);
+  const matRef = useRef<THREE.ShaderMaterial>(null);
+  const mouse = useRef({ x: 0, y: 0 });
+  const tmp = useRef(new THREE.Vector3());
+  const orbX = align === "split" ? 2.5 : 0;
+  const orbY = align === "split" ? 0.1 : -0.3;
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.current.y = -((e.clientY / window.innerHeight) * 2 - 1);
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  useFrame((state, delta) => {
+    // Drive the orb shader.
+    const mat = matRef.current;
+    if (mat) {
+      if (!reduced) mat.uniforms.uTime.value += delta;
+      // Energise the orb as the cursor approaches its screen position.
+      tmp.current.set(orbX, orbY, 0).project(state.camera);
+      const dist = Math.hypot(
+        tmp.current.x - mouse.current.x,
+        tmp.current.y - mouse.current.y
+      );
+      const target = reduced ? 0 : THREE.MathUtils.clamp(1 - dist / 0.9, 0, 1);
+      mat.uniforms.uHover.value = THREE.MathUtils.lerp(
+        mat.uniforms.uHover.value,
+        target,
+        0.08
+      );
+    }
+
+    if (reduced) return;
+    const g = groupRef.current;
+    if (g) {
+      g.rotation.y += (mouse.current.x * 0.06 - g.rotation.y) * 0.04;
+      g.rotation.x += (-mouse.current.y * 0.04 - g.rotation.x) * 0.04;
+    }
+    // Slow cinematic dolly + gentle cursor parallax.
+    state.camera.position.z = 7 + Math.sin(state.clock.elapsedTime * 0.2) * 0.25;
+    state.camera.position.x += (mouse.current.x * 0.15 - state.camera.position.x) * 0.03;
+    state.camera.position.y += (mouse.current.y * 0.1 - state.camera.position.y) * 0.03;
+    state.camera.lookAt(0, 0, 0);
+  });
+
+  return (
+    <group ref={groupRef}>
+      <Stars
+        radius={60}
+        depth={40}
+        count={reduced ? 800 : 2200}
+        factor={3}
+        saturation={0}
+        fade
+        speed={reduced ? 0 : 0.4}
+      />
+      <Nebula />
+      <Float
+        speed={reduced ? 0 : 1.1}
+        rotationIntensity={reduced ? 0 : 0.4}
+        floatIntensity={reduced ? 0 : 0.9}
+      >
+        <group position={[orbX, orbY, 0]}>
+          <Orb reduced={reduced} matRef={matRef} />
+        </group>
+      </Float>
+    </group>
+  );
+}
+
+export default function HeroScene3D({ align = "split" }: { align?: Align }) {
+  const reduced =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   return (
     <Canvas
-      camera={{ position: [0, 0, 6], fov: 60 }}
-      dpr={[1, 1.5]}
+      camera={{ position: [0, 0, 7], fov: 50 }}
+      dpr={[1, 1.75]}
       gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
       style={{ position: "absolute", inset: 0 }}
     >
-      <ambientLight intensity={0.4} />
-      <Particles />
+      <Scene align={align} reduced={reduced} />
+      <EffectComposer>
+        <Bloom
+          intensity={1.3}
+          luminanceThreshold={0.16}
+          luminanceSmoothing={0.9}
+          radius={0.85}
+          mipmapBlur
+        />
+        <Vignette eskil={false} offset={0.22} darkness={0.92} />
+      </EffectComposer>
     </Canvas>
   );
 }

@@ -7,9 +7,10 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { OPEN_PALETTE_EVENT } from "@/components/ui/CommandPalette";
 
 const links = [
   { href: "#about", label: "About" },
@@ -116,6 +117,16 @@ export function Navbar() {
               );
             })}
           </div>
+
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
+            aria-label="Open command palette"
+            className="ml-1 hidden items-center gap-1.5 rounded-full border border-border px-2.5 py-1.5 text-xs text-text-muted transition-colors hover:border-border-strong hover:text-text sm:inline-flex"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <kbd className="font-mono tracking-tight">⌘K</kbd>
+          </button>
 
           <Magnetic strength={0.2}>
             <a
