@@ -60,6 +60,10 @@ jobs:
         # tolerate one flake and try once more before failing the run.
         continue-on-error: true
 
+      - name: Pause before retry
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+
       - name: Retry deploy (Pages flake)
         if: steps.deployment.outcome == 'failure'
         id: deployment_retry
