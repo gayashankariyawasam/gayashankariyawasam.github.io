@@ -3,7 +3,9 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 
 const SITE_URL = "https://gayashankariyawasam.github.io/";
-const OUT = "public/sitemap-main.xml";
+// sitemap.xml is the conventional path; sitemap-main.xml stays alive for the
+// sitemap submission already sitting in Google Search Console.
+const OUTS = ["public/sitemap.xml", "public/sitemap-main.xml"];
 
 function lastCommitDate() {
   try {
@@ -30,6 +32,8 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 </urlset>
 `;
 
-mkdirSync(dirname(OUT), { recursive: true });
-writeFileSync(OUT, xml, "utf8");
-console.log(`wrote ${OUT}`);
+for (const out of OUTS) {
+  mkdirSync(dirname(out), { recursive: true });
+  writeFileSync(out, xml, "utf8");
+  console.log(`wrote ${out}`);
+}
