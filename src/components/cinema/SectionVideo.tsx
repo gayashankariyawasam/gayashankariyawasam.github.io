@@ -80,9 +80,7 @@ export function SectionVideo({
           muted
           loop
           playsInline
-          // "metadata" still pulls ~300KB per clip up front; the poster covers
-          // the frame until the on-view play() starts buffering.
-          preload="none"
+          preload="metadata"
           onError={() => setFailed(true)}
           className="h-full w-full object-cover"
           style={{ objectPosition: focus }}
