@@ -5,7 +5,11 @@ import { profile } from "@/data/profile";
 import { education } from "@/data/education";
 import { experiences } from "@/data/experience";
 import { papers } from "@/data/research";
-import { profilePageJsonLd } from "@/lib/seo";
+import {
+  aboutBreadcrumbJsonLd,
+  profilePageJsonLd,
+  scholarlyArticlesJsonLd,
+} from "@/lib/seo";
 import { GithubIcon, LinkedinIcon, ScholarIcon } from "@/components/ui/icons";
 
 const aboutDescription =
@@ -18,6 +22,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: `${profile.siteUrl}/about/`,
+    title: `About ${profile.name}`,
+    description: aboutDescription,
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: `About ${profile.name} — ${profile.shortRole}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
     title: `About ${profile.name}`,
     description: aboutDescription,
     images: ["/og.png"],
@@ -40,6 +57,17 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd()) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutBreadcrumbJsonLd()) }}
+      />
+      {scholarlyArticlesJsonLd().map((article) => (
+        <script
+          key={article["@id"]}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+        />
+      ))}
 
       <main className="mx-auto max-w-3xl px-6 py-20 sm:py-28">
         <Link

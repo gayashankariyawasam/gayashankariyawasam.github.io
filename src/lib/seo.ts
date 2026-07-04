@@ -1,4 +1,5 @@
 import { profile } from "@/data/profile";
+import { papers } from "@/data/research";
 
 // Stable, domain-owned identifiers so every page references the same entity.
 const PERSON_ID = `${profile.siteUrl}/#person`;
@@ -120,5 +121,37 @@ export function profilePageJsonLd() {
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": PERSON_ID },
     mainEntity: { "@id": PERSON_ID },
+  } as const;
+}
+
+/** The IEEE paper as its own entity, author-linked back to #person. */
+export function scholarlyArticlesJsonLd() {
+  return papers.map((paper) => ({
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "@id": paper.links[0].url,
+    name: paper.title,
+    headline: paper.title,
+    author: paper.authors.split(", ").map((name) =>
+      name.includes("Kariyawasam")
+        ? { "@id": PERSON_ID }
+        : { "@type": "Person", name }
+    ),
+    datePublished: String(paper.year),
+    publisher: { "@type": "Organization", name: "IEEE" },
+    isPartOf: { "@type": "CreativeWork", name: paper.venue },
+    url: paper.links[0].url,
+    sameAs: paper.links.map((l) => l.url),
+  }));
+}
+
+export function aboutBreadcrumbJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${profile.siteUrl}/` },
+      { "@type": "ListItem", position: 2, name: "About", item: `${profile.siteUrl}/about/` },
+    ],
   } as const;
 }
