@@ -44,7 +44,10 @@ export function CinematicHero() {
     let seq: HeroSequence | null = null;
     let cancelSeq: (() => void) | undefined;
     let progress = reduced ? 0.35 : 0;
-    let lastFrame = -1;
+    // Track the painted image, not the frame index: as frames stream in,
+    // repaint only when the nearest-loaded image actually changes — visual
+    // churn during load is what tanks Speed Index.
+    let lastPainted: HTMLImageElement | null = null;
 
     const size = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
@@ -53,7 +56,7 @@ export function CinematicHero() {
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      lastFrame = -1;
+      lastPainted = null;
       paint(true);
     };
 
@@ -66,17 +69,17 @@ export function CinematicHero() {
           seq.frames - 1,
           Math.round(progress * (seq.frames - 1))
         );
-        if (!force && index === lastFrame) return;
         const img = nearestLoaded(seq, index);
         if (img) {
+          if (!force && img === lastPainted) return;
           ctx.clearRect(0, 0, w, h);
           drawCover(ctx, img, w, h);
-          lastFrame = index;
+          lastPainted = img;
           return;
         }
       }
       paintProceduralFrame(ctx, w, h, progress);
-      lastFrame = -1;
+      lastPainted = null;
     };
 
     const ro = new ResizeObserver(size);
@@ -89,7 +92,8 @@ export function CinematicHero() {
         m,
         canvas.clientWidth,
         Math.min(window.devicePixelRatio || 1, dprCap),
-        () => paint(true)
+        () => paint(),
+        Math.round(progress * (m.frames - 1))
       );
       seq = s;
       cancelSeq = cancel;

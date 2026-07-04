@@ -54,15 +54,18 @@ function loadImage(url: string): Promise<HTMLImageElement> {
 }
 
 /**
- * Loads the sequence progressively: a coarse pass (every 6th frame) lands
- * fast so scrubbing works almost immediately, then the fill pass sharpens it.
+ * Loads the sequence progressively: the priority frame (whatever the canvas
+ * shows at the current scroll position) lands first so the first real paint
+ * is also the final one, then a coarse pass (every 6th frame) makes scrubbing
+ * work almost immediately, and the fill pass sharpens it.
  * onProgress fires as frames land so the canvas can repaint.
  */
 export function loadSequence(
   m: SequenceManifest,
   viewportWidth: number,
   dpr: number,
-  onProgress: (seq: HeroSequence) => void
+  onProgress: (seq: HeroSequence) => void,
+  priorityIndex = 0
 ): { seq: HeroSequence; cancel: () => void } {
   const target = viewportWidth * Math.min(dpr, 2);
   const width =
@@ -75,9 +78,10 @@ export function loadSequence(
   };
 
   let cancelled = false;
-  const order: number[] = [];
-  for (let i = 0; i < m.frames; i += 6) order.push(i);
-  for (let i = 0; i < m.frames; i++) if (i % 6 !== 0) order.push(i);
+  const order: number[] = [priorityIndex];
+  for (let i = 0; i < m.frames; i += 6) if (i !== priorityIndex) order.push(i);
+  for (let i = 0; i < m.frames; i++)
+    if (i % 6 !== 0 && i !== priorityIndex) order.push(i);
 
   (async () => {
     // Modest concurrency keeps decode jank off the scroll thread.
