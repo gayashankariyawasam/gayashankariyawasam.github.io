@@ -86,3 +86,28 @@ export const stack: StackCategory[] = [
     ],
   },
 ];
+
+/** Ordered strip for the cinematic skills marquee. */
+export const marqueeSkills = [
+  "Python",
+  "Java",
+  "TypeScript",
+  "LangChain",
+  "LangGraph",
+  "LangSmith",
+  "MCP Servers",
+  "RAG",
+  "Claude API",
+  "OpenAI API",
+  "Redis",
+  "Spring Boot",
+  "Angular",
+  "Docker",
+  "Kubernetes",
+  "Azure",
+  "GitOps",
+  "MySQL",
+  "Oracle",
+  "Computer Vision",
+  "Software Architecture",
+] as const;

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Anton, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/profile";
 import { personJsonLd, websiteJsonLd } from "@/lib/seo";
@@ -19,12 +19,21 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// Distinctive display face for headings — geometric grotesk that reads
-// "technical but designed", pairs with Geist for body copy.
-const spaceGrotesk = Space_Grotesk({
+// Massive condensed display caps — the film-title voice of the noir theme.
+const anton = Anton({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: "400",
+  display: "swap",
+});
+
+// Editorial serif italic for pull-quotes and human asides between the
+// machine-voiced display headings.
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
   display: "swap",
 });
 
@@ -117,7 +126,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
       <head>

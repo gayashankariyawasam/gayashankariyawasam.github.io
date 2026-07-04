@@ -9,17 +9,20 @@ export function SmoothScroll() {
   useEffect(() => {
     if (reduced) return;
     // Skip Lenis on touch devices — native momentum scroll feels better and
-    // avoids fighting iOS Safari's rubber-band behavior.
+    // avoids fighting iOS Safari's rubber-band behavior. ScrollTrigger still
+    // drives the scrubbed sections off native scroll there.
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
-    let raf = 0;
     let cleanup: (() => void) | undefined;
     let cancelled = false;
 
     // Lazy-load Lenis only on desktop, after first paint, so the chunk is
     // never in the initial bundle for mobile users.
     (async () => {
-      const { default: Lenis } = await import("lenis");
+      const [{ default: Lenis }, { gsap, ScrollTrigger }] = await Promise.all([
+        import("lenis"),
+        import("@/lib/gsap"),
+      ]);
       if (cancelled) return;
 
       const lenis = new Lenis({
@@ -30,21 +33,21 @@ export function SmoothScroll() {
         touchMultiplier: 1.5,
       });
 
-      const tick = (time: number) => {
-        lenis.raf(time);
-        raf = requestAnimationFrame(tick);
-      };
-      raf = requestAnimationFrame(tick);
+      // Drive Lenis from GSAP's ticker so scrubbed ScrollTriggers and the
+      // smooth scroll share one clock — no double-raf drift on pinned scenes.
+      lenis.on("scroll", ScrollTrigger.update);
+      const tick = (time: number) => lenis.raf(time * 1000);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
 
       cleanup = () => {
-        cancelAnimationFrame(raf);
+        gsap.ticker.remove(tick);
         lenis.destroy();
       };
     })();
 
     return () => {
       cancelled = true;
-      if (raf) cancelAnimationFrame(raf);
       cleanup?.();
     };
   }, [reduced]);

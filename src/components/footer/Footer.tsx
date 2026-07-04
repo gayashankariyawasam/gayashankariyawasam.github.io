@@ -4,27 +4,52 @@ import Link from "next/link";
 import { profile } from "@/data/profile";
 import { KonamiTerminal } from "./KonamiTerminal";
 
+const socialLinks = [
+  { label: "LinkedIn", href: profile.socials.linkedin },
+  { label: "GitHub", href: profile.socials.github },
+  { label: "Google Scholar", href: profile.socials.scholar },
+  { label: "IEEE", href: profile.socials.ieee },
+  { label: "Newsletter", href: profile.socials.newsletter },
+];
+
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-border px-6 py-10 pb-[max(2.5rem,calc(2.5rem+env(safe-area-inset-bottom)))]">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-        <div className="text-sm text-text-muted">
-          © {year} {profile.name}. Built with Next.js, GSAP, Motion & Three.js.
-        </div>
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-text-subtle">
-          <span className="font-mono">↑ ↑ ↓ ↓ ← → ← → B A</span>
-          <Link href="/about/" className="hover:text-text">
+    <footer className="relative border-t border-border px-6 py-12 pb-[max(2.5rem,calc(2.5rem+env(safe-area-inset-bottom)))]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8">
+        <nav
+          aria-label="Social links"
+          className="flex flex-wrap items-center gap-x-7 gap-y-3"
+        >
+          {socialLinks.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted transition-colors hover:text-accent-2"
+            >
+              {l.label}
+            </a>
+          ))}
+          <Link
+            href="/about/"
+            className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted transition-colors hover:text-accent-2"
+          >
             About
           </Link>
-          <a
-            href={profile.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-text"
-          >
-            Source on GitHub
-          </a>
+        </nav>
+
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-border pt-6 sm:flex-row sm:items-center">
+          <div className="text-sm text-text-muted">
+            © {year} {profile.name}. Built with Next.js, GSAP &amp; Lenis.
+          </div>
+          <div className="flex items-center gap-5 font-mono text-xs text-text-subtle">
+            <span>↑ ↑ ↓ ↓ ← → ← → B A</span>
+            <span className="serif-note text-text-subtle">
+              fin.
+            </span>
+          </div>
         </div>
       </div>
       <KonamiTerminal />

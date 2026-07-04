@@ -42,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent tooling & personal media-generation reference (not site content)
+/.agents/
+/.claude/
+/skills-lock.json
+/WhatsApp Image*.jpeg

@@ -1,19 +1,26 @@
 @import "tailwindcss";
 
+/* ————————————————————————————————————————————————————————————————
+   ENTERPRISE AI NOIR
+   Ink-black environment · warm ivory type · oxidized teal / deep
+   emerald accents · restrained gold for premium emphasis.
+   ———————————————————————————————————————————————————————————————— */
+
 :root {
-  --bg: #07070b;
-  --bg-2: #0d0d14;
-  --surface: #14141d;
-  --surface-2: #1c1c28;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #ececf1;
-  --text-muted: #9b9bab;
-  --text-subtle: #5e5e70;
-  --accent: #8b5cf6;
-  --accent-2: #22d3ee;
-  --accent-warm: #f59e0b;
-  --grad: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+  --bg: #050706;
+  --bg-2: #090e0c;
+  --surface: #0d1411;
+  --surface-2: #142019;
+  --border: rgba(237, 232, 220, 0.08);
+  --border-strong: rgba(237, 232, 220, 0.18);
+  --text: #ede8dc;
+  --text-muted: #a49f90;
+  --text-subtle: #6f6b5e;
+  --accent: #37937b; /* oxidized teal */
+  --accent-2: #63c7a8; /* verdigris — sparing, edges & live signals */
+  --accent-deep: #0d4034; /* deep emerald ground */
+  --accent-warm: #c8a45e; /* gold — premium emphasis only */
+  --grad: linear-gradient(120deg, #63c7a8 0%, #c8a45e 100%);
 }
 
 @theme inline {
@@ -28,10 +35,13 @@
   --color-text-subtle: var(--text-subtle);
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
+  --color-accent-deep: var(--accent-deep);
   --color-accent-warm: var(--accent-warm);
+  --color-gold: var(--accent-warm);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
 }
 
 * {
@@ -50,39 +60,40 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
+  /* clip, not hidden: overflow-x hidden turns body into a scroll container
+     and silently kills position:sticky — which the pinned cinematic scenes
+     depend on. clip guards horizontal bleed without that side effect. */
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* Display face for headlines — Space Grotesk gives the type a distinctive,
-   engineered character instead of the default Geist everywhere. */
 h1,
 h2 {
   font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
-  font-feature-settings: "ss01" 1, "ss03" 1;
 }
 
 body {
   background-image:
-    radial-gradient(at 20% -10%, rgba(139, 92, 246, 0.15), transparent 50%),
-    radial-gradient(at 80% 110%, rgba(34, 211, 238, 0.12), transparent 50%);
+    radial-gradient(at 18% -12%, rgba(13, 64, 52, 0.35), transparent 52%),
+    radial-gradient(at 85% 112%, rgba(55, 147, 123, 0.12), transparent 50%);
   background-attachment: fixed;
 }
 
-/* Subtle film grain over the whole page — adds a premium, tactile feel that
-   flat dark backgrounds lack. Pointer-events off, sits above bg, below content. */
+/* Cinematic film grain over the whole page. Pointer-events off, sits above
+   backdrops, below content. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.4);
-  color: #fff;
+  background: rgba(55, 147, 123, 0.45);
+  color: #f4f0e6;
 }
 
 ::-webkit-scrollbar {
@@ -93,11 +104,11 @@ body::before {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(237, 232, 220, 0.1);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(237, 232, 220, 0.2);
 }
 
 /* Lenis smooth scroll */
@@ -115,12 +126,27 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Section spacing */
 section {
   position: relative;
 }
 
-/* Gradient text utility */
+/* Massive condensed display type — the film-title voice of the site. */
+.display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+/* Editorial serif italic — the human voice between the machine headings. */
+.serif-note {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Gradient text utility — verdigris → gold */
 .text-gradient {
   background: var(--grad);
   -webkit-background-clip: text;
@@ -131,28 +157,69 @@ section {
 /* Subtle grid pattern */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(237, 232, 220, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(237, 232, 220, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
 
-/* Glass surface */
+/* Glass command-center surface */
 .glass {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.01)
+    rgba(237, 232, 220, 0.05),
+    rgba(237, 232, 220, 0.015)
   );
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
   border: 1px solid var(--border);
+}
+
+/* HUD corner brackets — command-room chrome for panels & frames. */
+.hud-corners {
+  position: relative;
+}
+.hud-corners::before,
+.hud-corners::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.75;
+}
+.hud-corners::before {
+  top: 0;
+  left: 0;
+  border-top: 1px solid var(--accent-2);
+  border-left: 1px solid var(--accent-2);
+}
+.hud-corners::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid var(--accent-2);
+  border-right: 1px solid var(--accent-2);
+}
+
+/* Section kicker label — mono, tracked out, with a live tick. */
+.kicker {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--text-subtle);
+}
+.kicker b {
+  color: var(--accent-2);
+  font-weight: 400;
 }
 
 /* Card hover lift */
 .card-hover {
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-color 0.3s ease, background 0.3s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s ease,
+    background 0.3s ease;
 }
 .card-hover:hover {
   transform: translateY(-4px);
@@ -161,29 +228,25 @@ section {
 
 /* Marquee */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 .marquee-track {
-  animation: marquee 35s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 .marquee:hover .marquee-track {
   animation-play-state: paused;
 }
 
-/* Short-viewport laptops (≤ ~820px tall): shrink hero so the badge, heading
-   and CTA buttons all fit without the flex-centered block overflowing the
-   viewport. The `lg:text-[5.5rem]` heading at 88px is the main offender on
-   1366×768 / scaled 1080p laptops. */
-@media (max-height: 820px) {
-  .hero-content {
-    padding-top: 6rem;
-    padding-bottom: 3rem;
-  }
-  .hero-heading {
-    font-size: clamp(2.25rem, 8vh, 4rem);
-    line-height: 1.05;
-  }
+/* Cinematic vignette for video / canvas backdrops. */
+.vignette {
+  background:
+    linear-gradient(to bottom, rgba(5, 7, 6, 0.85), transparent 22%, transparent 70%, var(--bg) 100%),
+    radial-gradient(ellipse 130% 90% at 50% 45%, transparent 55%, rgba(5, 7, 6, 0.9) 100%);
 }
 
 /* Reduced motion */
