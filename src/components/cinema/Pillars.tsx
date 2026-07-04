@@ -105,7 +105,7 @@ export function Pillars() {
     // Static stacked pillars — no pinning for reduced-motion readers.
     return (
       <section id="about" className="relative px-6 py-28">
-        <SectionVideo src="/media/architect-v2.mp4" poster="/media/architect-v2.jpg" dim={0.78} />
+        <SectionVideo src="/media/architect-v2.mp4" poster="/media/architect-v2.webp" dim={0.78} />
         <div className="relative mx-auto flex max-w-5xl flex-col gap-16">
           <p className="kicker">
             <b>●</b> SEQ 02 / Three pillars
@@ -125,7 +125,7 @@ export function Pillars() {
   return (
     <section ref={sectionRef} id="about" className="relative h-[320vh]">
       <div className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
-        <SectionVideo src="/media/architect-v2.mp4" poster="/media/architect-v2.jpg" dim={0.72} />
+        <SectionVideo src="/media/architect-v2.mp4" poster="/media/architect-v2.webp" dim={0.72} />
 
         {/* Scene chrome */}
         <p className="kicker absolute left-6 top-24 z-10 sm:left-10">

@@ -101,7 +101,7 @@ function WorkCard({ p, hero }: { p: Project; hero?: boolean }) {
 export function WorkCinema() {
   return (
     <section id="work" className="relative px-6 py-28 sm:py-40">
-      <SectionVideo src="/media/platform.mp4" poster="/media/platform.jpg" dim={0.82} />
+      <SectionVideo src="/media/platform.mp4" poster="/media/platform.webp" dim={0.82} />
 
       <div className="relative mx-auto max-w-6xl">
         <Reveal>

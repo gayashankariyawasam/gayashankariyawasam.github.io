@@ -13,7 +13,7 @@ export function Finale() {
       id="contact"
       className="relative flex min-h-[100svh] items-center overflow-hidden px-6 py-32"
     >
-      <SectionVideo src="/media/closer.mp4" poster="/media/closer.jpg" dim={0.68} focus="50% 28%" />
+      <SectionVideo src="/media/closer.mp4" poster="/media/closer.webp" dim={0.68} focus="50% 28%" />
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-center text-center">
         <Reveal>
