@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, useInView } from "motion/react";
+import { animate, useInView, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/ui/Reveal";
 
 type Stat = {
@@ -29,17 +29,19 @@ const stats: Stat[] = [
 function CountUp({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const [display, setDisplay] = useState(0);
+  const reducedMotion = useReducedMotion();
+  /** Must start at the real value: crawlers and link previews read the static HTML. */
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || reducedMotion) return;
     const controls = animate(0, value, {
       duration: 1.6,
       ease: [0.2, 0.8, 0.2, 1],
       onUpdate: (v) => setDisplay(Math.round(v)),
     });
     return () => controls.stop();
-  }, [inView, value]);
+  }, [inView, reducedMotion, value]);
 
   return (
     <span ref={ref}>
