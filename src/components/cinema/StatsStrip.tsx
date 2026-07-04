@@ -63,9 +63,13 @@ export function StatsStrip() {
           </p>
         </Reveal>
 
-        <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {/* role="list" restores list semantics that list-style:none strips in Safari/VoiceOver */}
+        <ul
+          role="list"
+          className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
+        >
           {stats.map((s, i) => (
-            <div
+            <li
               key={s.label}
               className={
                 "group relative bg-bg p-7 transition-colors duration-500 hover:bg-surface " +
@@ -74,23 +78,23 @@ export function StatsStrip() {
               }
             >
               <Reveal delay={(i % 3) * 0.08}>
-                <dd className="display text-5xl text-gold sm:text-6xl">
+                <div className="display text-5xl text-gold sm:text-6xl">
                   {s.value !== undefined ? (
                     <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
                   ) : (
                     <span>{s.text}</span>
                   )}
-                </dd>
-                <dt className="mt-4 max-w-[26ch] text-sm leading-relaxed text-text-muted">
+                </div>
+                <p className="mt-4 max-w-[26ch] text-sm leading-relaxed text-text-muted">
                   {s.label}
-                </dt>
+                </p>
                 <span className="pointer-events-none absolute right-6 top-6 font-mono text-[0.6rem] tracking-[0.25em] text-text-subtle opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   M{String(i + 1).padStart(2, "0")}
                 </span>
               </Reveal>
-            </div>
+            </li>
           ))}
-        </dl>
+        </ul>
       </div>
     </section>
   );

@@ -32,11 +32,13 @@ export function Footer() {
               {l.label}
             </a>
           ))}
+          {/* Named differently from the navbar's "About" (#about section) — same-name
+              links must share a destination for screen-reader users. */}
           <Link
             href="/about/"
             className="font-mono text-xs uppercase tracking-[0.2em] text-text-muted transition-colors hover:text-accent-2"
           >
-            About
+            Full profile
           </Link>
         </nav>
 
