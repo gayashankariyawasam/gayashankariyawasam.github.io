@@ -2,19 +2,19 @@ export const profile = {
   name: "Gayashan Kariyawasam",
   shortName: "Gayashan",
   initials: "GK",
-  role: "Associate Technical Team Lead — AI & Platform Engineering",
-  shortRole: "Tech Lead — AI & Platform Engineering",
-  company: "CodeGen International",
-  companyUrl: "https://codegen.co.uk",
+  role: "Associate Lead - AI & ML",
+  shortRole: "Associate Lead - AI & ML",
+  company: "AceTrak Technologies",
+  companyUrl: "https://zone24x7.com/",
   location: "Colombo, Sri Lanka",
   timezone: "Asia/Colombo",
   yearsExperience: 6,
 
   tagline: "From AI curiosity → AI capability → AI strategy.",
   shortBio:
-    "Tech lead with ~6 years shipping production AI systems — agentic platforms, MCP servers, RAG pipelines and LLM-powered tooling at enterprise scale.",
+    "Associate Lead - AI & ML with ~6 years shipping production AI systems — agentic platforms, MCP servers, RAG pipelines and LLM-powered tooling at enterprise scale.",
   longBio:
-    "I lead AI & Platform Engineering at CodeGen International, where I design, build and ship agentic AI systems end-to-end. My current work centres on a conversational diagnostic platform (IDRP), custom Model Context Protocol servers, RAG pipelines, and LLM-powered enterprise integrations across travel-tech and hospitality. I mentor a team of six senior engineers, hold an IEEE publication in computer vision, and I'm finishing an MSc in Software Architecture at the University of Moratuwa.",
+    "I'm Associate Lead - AI & ML at AceTrak Technologies, part of Zone24x7. Before that I spent nearly six years at CodeGen International, where I led AI & Platform Engineering and designed, built and shipped agentic AI systems end-to-end — a conversational diagnostic platform (IDRP), custom Model Context Protocol servers, RAG pipelines, and LLM-powered enterprise integrations across travel-tech and hospitality — while mentoring a team of six senior engineers. I hold an IEEE publication in computer vision, and I'm finishing an MSc in Software Architecture at the University of Moratuwa.",
 
   currentlyExploring: [
     "Model Context Protocol (MCP) servers",

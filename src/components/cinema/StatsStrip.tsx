@@ -18,7 +18,7 @@ type Stat = {
 
 const stats: Stat[] = [
   { value: 6, suffix: "+", label: "Years shipping production AI & platform systems" },
-  { text: "Lead", label: "AI & Platform Engineering @ CodeGen International" },
+  { text: "AI & ML", label: "Associate Lead @ AceTrak Technologies" },
   { value: 40, suffix: "%+", prefix: "−", label: "Support escalations, via the IDRP agentic platform", wide: true },
   { value: 60, suffix: "%", prefix: "−", label: "Redundant API calls in the LLM cancellation-policy pipeline" },
   { value: 30, suffix: "%", prefix: "−", label: "p95 search latency after inference caching" },

@@ -1,6 +1,6 @@
 # gayashankariyawasam.github.io
 
-Personal portfolio for **Gayashan Kariyawasam** — Tech Lead & AI Engineer at Codegen International.
+Personal portfolio for **Gayashan Kariyawasam** — Associate Lead - AI & ML at AceTrak Technologies.
 
 Live at <https://gayashankariyawasam.github.io>.
 

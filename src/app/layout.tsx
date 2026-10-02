@@ -38,20 +38,22 @@ const instrumentSerif = Instrument_Serif({
 });
 
 const description =
-  "AI & Platform Engineering Tech Lead at CodeGen International. IEEE-published, MSc Software Architecture. Building agentic AI, MCP servers, RAG pipelines.";
+  "Associate Lead - AI & ML at AceTrak Technologies. IEEE-published, MSc Software Architecture. Building agentic AI, MCP servers, RAG pipelines.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
   title: {
-    default: `${profile.name} — AI & Platform Engineering Tech Lead`,
+    default: `${profile.name} — ${profile.shortRole}`,
     template: `%s · ${profile.name}`,
   },
   description,
   keywords: [
     "Gayashan Kariyawasam",
     "AI Engineer",
-    "Technical Team Lead",
+    "Associate Lead - AI & ML",
+    "AceTrak Technologies",
     "CodeGen International",
+    "Machine Learning",
     "Agentic AI",
     "Generative AI",
     "MCP Servers",
@@ -80,7 +82,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: profile.siteUrl,
-    title: `${profile.name} — AI & Platform Engineering Tech Lead`,
+    title: `${profile.name} — ${profile.shortRole}`,
     description,
     siteName: profile.name,
     locale: "en_US",
@@ -91,13 +93,13 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: `${profile.name} — AI & Platform Engineering Tech Lead`,
+        alt: `${profile.name} — ${profile.shortRole}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — AI & Platform Engineering Tech Lead`,
+    title: `${profile.name} — ${profile.shortRole}`,
     description,
     images: ["/og.png"],
   },

@@ -21,11 +21,16 @@ export function personJsonLd() {
     description: profile.shortBio,
     // Separates this Gayashan Kariyawasam from others sharing the surname.
     disambiguatingDescription:
-      "AI & Platform Engineering Tech Lead at CodeGen International in Colombo, Sri Lanka — IEEE-published computer-vision researcher building agentic AI, MCP servers and RAG pipelines.",
+      "Associate Lead - AI & ML at AceTrak Technologies in Colombo, Sri Lanka — IEEE-published computer-vision researcher building agentic AI, MCP servers and RAG pipelines.",
+    // companyUrl is the parent's site — AceTrak Technologies is part of Zone24x7.
     worksFor: {
       "@type": "Organization",
       name: profile.company,
-      url: profile.companyUrl,
+      parentOrganization: {
+        "@type": "Organization",
+        name: "Zone24x7",
+        url: profile.companyUrl,
+      },
     },
     nationality: { "@type": "Country", name: "Sri Lanka" },
     homeLocation: {

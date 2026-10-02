@@ -49,7 +49,7 @@ export function KonamiTerminal() {
         break;
       case "about":
         out =
-          "Gayashan Kariyawasam — Tech Lead & AI Engineer at Codegen International. Based in Colombo, Sri Lanka. IEEE-published researcher.";
+          "Gayashan Kariyawasam — Associate Lead - AI & ML at AceTrak Technologies. Based in Colombo, Sri Lanka. IEEE-published researcher.";
         break;
       case "stack":
         out =

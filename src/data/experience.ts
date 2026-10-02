@@ -13,21 +13,33 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
+    role: "Associate Lead - AI & ML",
+    company: "AceTrak Technologies",
+    companyUrl: "https://zone24x7.com/",
+    start: "Sep 2026",
+    end: "Present",
+    location: "Colombo, Sri Lanka",
+    summary:
+      "Leading AI & ML engineering at AceTrak Technologies, part of Zone24x7.",
+    highlights: [],
+    stack: [],
+  },
+  {
     role: "Associate Technical Team Lead — AI & Platform Engineering",
     company: "CodeGen International",
     companyUrl: "https://codegen.co.uk",
     start: "Jan 2024",
-    end: "Present",
+    end: "Sep 2026",
     location: "Colombo, Sri Lanka",
     summary:
-      "Lead the design, development and deployment of agentic AI systems and LLM-powered platforms at enterprise scale. Mentor a team of senior engineers and act as the primary technical contact for AI initiatives across multiple enterprise integrations.",
+      "Led the design, development and deployment of agentic AI systems and LLM-powered platforms at enterprise scale. Mentored a team of senior engineers and acted as the primary technical contact for AI initiatives across multiple enterprise integrations.",
     highlights: [
       "Led IDRP — an agentic conversational AI platform for self-service API testing, log tracing and integration troubleshooting. Reduced support escalations by 40%+",
       "Hands-on experience designing and building Model Context Protocol (MCP) servers in Python — including agentic RAG systems for technical documentation and context-providing servers for integration patterns",
       "Engineered an LLM-powered cancellation policy interpretation pipeline for a hospitality distribution integration with Redis-backed inference caching and prompt-engineering optimization — eliminated ~60% of redundant API calls and reduced p95 search latency by ~30%",
       "Drove enterprise-wide adoption of agentic dev tooling (Claude Code, Kiro, Antigravity, Codex, Qwen) and authored custom Claude Code commands",
       "Initiated and led the Tritium OPS Tool — deployment governance, audit trails, GitOps and Jira integration, and an admin dashboard",
-      "Mentor senior engineers across code review, system design, agentic development and stakeholder communication; primary technical contact for AI initiatives across multiple enterprise integrations",
+      "Mentored senior engineers across code review, system design, agentic development and stakeholder communication; primary technical contact for AI initiatives across multiple enterprise integrations",
     ],
     stack: [
       "Python",

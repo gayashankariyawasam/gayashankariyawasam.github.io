@@ -62,7 +62,7 @@ export function TimelineCinema() {
             className="display mb-20 text-text"
             style={{ fontSize: "clamp(2.6rem, 7vw, 6rem)" }}
           >
-            Six years, four <span className="text-gradient">acts</span>
+            Six years, five <span className="text-gradient">acts</span>
           </h2>
         </Reveal>
 
@@ -120,21 +120,23 @@ export function TimelineCinema() {
                     <p className="mt-4 text-sm leading-relaxed text-text-muted">
                       {e.summary}
                     </p>
-                    <ul
-                      className={
-                        "mt-4 space-y-2 text-sm text-text-muted/90 " +
-                        (left ? "sm:[direction:rtl]" : "")
-                      }
-                    >
-                      {e.highlights.slice(0, 3).map((h) => (
-                        <li key={h} className="[direction:ltr]">
-                          <span className="mr-2 text-accent-2" aria-hidden>
-                            ◆
-                          </span>
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
+                    {e.highlights.length > 0 && (
+                      <ul
+                        className={
+                          "mt-4 space-y-2 text-sm text-text-muted/90 " +
+                          (left ? "sm:[direction:rtl]" : "")
+                        }
+                      >
+                        {e.highlights.slice(0, 3).map((h) => (
+                          <li key={h} className="[direction:ltr]">
+                            <span className="mr-2 text-accent-2" aria-hidden>
+                              ◆
+                            </span>
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </Reveal>
                 </li>
               );

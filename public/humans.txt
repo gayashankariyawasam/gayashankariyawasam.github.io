@@ -1,6 +1,6 @@
 /* TEAM */
 Name:     Gayashan Kariyawasam
-Role:     Tech Lead & AI Engineer
+Role:     Associate Lead - AI & ML
 Site:     https://gayashankariyawasam.github.io
 Github:   gayashankariyawasam
 Linkedin: gayashan-kariyawasam

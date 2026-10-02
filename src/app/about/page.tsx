@@ -13,7 +13,7 @@ import {
 import { GithubIcon, LinkedinIcon, ScholarIcon } from "@/components/ui/icons";
 
 const aboutDescription =
-  "Gayashan Kariyawasam is an AI & Platform Engineering Tech Lead at CodeGen International in Colombo, Sri Lanka — IEEE-published, MSc Software Architecture (University of Moratuwa). He builds agentic AI, MCP servers and RAG pipelines.";
+  "Gayashan Kariyawasam is Associate Lead - AI & ML at AceTrak Technologies in Colombo, Sri Lanka — IEEE-published, MSc Software Architecture (University of Moratuwa). He builds agentic AI, MCP servers and RAG pipelines.";
 
 export const metadata: Metadata = {
   title: { absolute: `About Gayashan Kariyawasam — ${profile.shortRole}` },
@@ -99,8 +99,8 @@ export default function AboutPage() {
 
         <section className="mt-12 space-y-5 text-lg leading-relaxed text-text-muted">
           <p>
-            I&apos;m <span className="text-text">Gayashan Kariyawasam</span>, an{" "}
-            <span className="text-text">AI &amp; Platform Engineering Tech Lead</span>{" "}
+            I&apos;m <span className="text-text">Gayashan Kariyawasam</span>,{" "}
+            <span className="text-text">Associate Lead - AI &amp; ML</span>{" "}
             at{" "}
             <a
               href={profile.companyUrl}
@@ -115,11 +115,12 @@ export default function AboutPage() {
             conversational diagnostic platforms, custom{" "}
             <span className="text-text">Model Context Protocol (MCP)</span>{" "}
             servers, <span className="text-text">RAG pipelines</span> and
-            LLM-powered enterprise integrations across travel-tech and
-            hospitality.
+            LLM-powered enterprise integrations.
           </p>
           <p>
-            I lead a team of six senior engineers, hold an{" "}
+            Before AceTrak I spent nearly six years at CodeGen International,
+            most recently leading AI &amp; Platform Engineering and a team of
+            six senior engineers across travel-tech and hospitality. I hold an{" "}
             <a
               href={profile.socials.ieeeAuthor}
               target="_blank"
