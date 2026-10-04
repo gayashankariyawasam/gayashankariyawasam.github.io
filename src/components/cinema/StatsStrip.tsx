@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, useInView, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/ui/Reveal";
+import { profile } from "@/data/profile";
+import { papers } from "@/data/research";
 
 type Stat = {
   /** Numeric stats count up on scroll; text stats land as-is. */
@@ -18,11 +20,11 @@ type Stat = {
 
 const stats: Stat[] = [
   { value: 6, suffix: "+", label: "Years shipping production AI & platform systems" },
-  { text: "AI & ML", label: "Associate Lead @ AceTrak Technologies" },
+  { text: profile.roleFocus, label: `${profile.roleTitle} @ ${profile.company}` },
   { value: 40, suffix: "%+", prefix: "−", label: "Support escalations, via the IDRP agentic platform", wide: true },
   { value: 60, suffix: "%", prefix: "−", label: "Redundant API calls in the LLM cancellation-policy pipeline" },
   { value: 30, suffix: "%", prefix: "−", label: "p95 search latency after inference caching" },
-  { value: 53, suffix: "+", label: "Citations on IEEE-published computer vision research" },
+  { value: papers[0].citations, suffix: "+", label: "Citations on IEEE-published computer vision research" },
   { text: "MSc", label: "Software Architecture · University of Moratuwa · in progress", full: true },
 ];
 

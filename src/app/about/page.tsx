@@ -12,8 +12,7 @@ import {
 } from "@/lib/seo";
 import { GithubIcon, LinkedinIcon, ScholarIcon } from "@/components/ui/icons";
 
-const aboutDescription =
-  "Gayashan Kariyawasam is Associate Lead - AI & ML at AceTrak Technologies in Colombo, Sri Lanka — IEEE-published, MSc Software Architecture (University of Moratuwa). He builds agentic AI, MCP servers and RAG pipelines.";
+const aboutDescription = `${profile.name} is ${profile.headline} in ${profile.location} — IEEE-published, MSc Software Architecture (University of Moratuwa). He builds agentic AI, MCP servers and RAG pipelines.`;
 
 export const metadata: Metadata = {
   title: { absolute: `About Gayashan Kariyawasam — ${profile.shortRole}` },
@@ -100,7 +99,7 @@ export default function AboutPage() {
         <section className="mt-12 space-y-5 text-lg leading-relaxed text-text-muted">
           <p>
             I&apos;m <span className="text-text">Gayashan Kariyawasam</span>,{" "}
-            <span className="text-text">Associate Lead - AI &amp; ML</span>{" "}
+            <span className="text-text">{profile.role}</span>{" "}
             at{" "}
             <a
               href={profile.companyUrl}
@@ -118,7 +117,7 @@ export default function AboutPage() {
             LLM-powered enterprise integrations.
           </p>
           <p>
-            Before AceTrak I spent nearly six years at CodeGen International,
+            Before that I spent nearly six years at CodeGen International,
             most recently leading AI &amp; Platform Engineering and a team of
             six senior engineers across travel-tech and hospitality. I hold an{" "}
             <a

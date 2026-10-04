@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { OPEN_TERMINAL_EVENT } from "@/components/ui/CommandPalette";
+import { profile } from "@/data/profile";
 
 const KONAMI = [
   "ArrowUp",
@@ -48,8 +49,7 @@ export function KonamiTerminal() {
         out = HELP;
         break;
       case "about":
-        out =
-          "Gayashan Kariyawasam — Associate Lead - AI & ML at AceTrak Technologies. Based in Colombo, Sri Lanka. IEEE-published researcher.";
+        out = `${profile.name} — ${profile.headline}. Based in ${profile.location}. IEEE-published researcher.`;
         break;
       case "stack":
         out =
@@ -57,21 +57,15 @@ export function KonamiTerminal() {
         break;
       case "contact":
         out = "Best reach: LinkedIn — opening now…";
-        window.open(
-          "https://www.linkedin.com/in/gayashan-kariyawasam/",
-          "_blank"
-        );
+        window.open(profile.socials.linkedin, "_blank");
         break;
       case "github":
         out = "Opening github.com/gayashankariyawasam …";
-        window.open("https://github.com/gayashankariyawasam", "_blank");
+        window.open(profile.socials.github, "_blank");
         break;
       case "scholar":
         out = "Opening Google Scholar …";
-        window.open(
-          "https://scholar.google.com/citations?user=arKNy4MAAAAJ&hl=en",
-          "_blank"
-        );
+        window.open(profile.socials.scholar, "_blank");
         break;
       case "clear":
         setLines([]);

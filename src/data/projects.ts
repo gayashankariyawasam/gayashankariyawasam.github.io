@@ -1,3 +1,5 @@
+import { papers } from "./research";
+
 export type Project = {
   title: string;
   blurb: string;
@@ -84,12 +86,12 @@ export const projects: Project[] = [
   },
   {
     title: "Suspicious Activity Detection in Surveillance Footage",
-    blurb: "IEEE-published computer vision research (53+ citations)",
+    blurb: `IEEE-published computer vision research (${papers[0].citations}+ citations)`,
     description:
       "Co-author of an ICECTA 2019 paper detecting anomalous behaviour in surveillance footage using deep learning. Presented at the International Conference on Electrical and Computing Technologies and Applications, Ras Al Khaimah, UAE.",
     year: "2019",
     category: "Research",
-    metric: "53+ citations · IEEE Xplore",
+    metric: `${papers[0].citations}+ citations · IEEE Xplore`,
     stack: ["Python", "TensorFlow", "OpenCV", "Computer Vision"],
     links: [
       {

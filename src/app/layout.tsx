@@ -37,8 +37,7 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const description =
-  "Associate Lead - AI & ML at AceTrak Technologies. IEEE-published, MSc Software Architecture. Building agentic AI, MCP servers, RAG pipelines.";
+const description = profile.description;
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
@@ -50,8 +49,8 @@ export const metadata: Metadata = {
   keywords: [
     "Gayashan Kariyawasam",
     "AI Engineer",
-    "Associate Lead - AI & ML",
-    "AceTrak Technologies",
+    profile.role,
+    profile.company,
     "CodeGen International",
     "Machine Learning",
     "Agentic AI",
@@ -114,7 +113,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  manifest: "/manifest.webmanifest",
   verification: {
     google: "_6mGi9_9zuFeP-Vucsw2vMjVCa0ptTHyKxeQCku8SNE",
   },

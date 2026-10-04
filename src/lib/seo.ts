@@ -20,15 +20,14 @@ export function personJsonLd() {
     jobTitle: profile.role,
     description: profile.shortBio,
     // Separates this Gayashan Kariyawasam from others sharing the surname.
-    disambiguatingDescription:
-      "Associate Lead - AI & ML at AceTrak Technologies in Colombo, Sri Lanka — IEEE-published computer-vision researcher building agentic AI, MCP servers and RAG pipelines.",
-    // companyUrl is the parent's site — AceTrak Technologies is part of Zone24x7.
+    disambiguatingDescription: `${profile.headline} in ${profile.location} — IEEE-published computer-vision researcher building agentic AI, MCP servers and RAG pipelines.`,
+    // companyUrl is the parent's site, so it belongs on parentOrganization.
     worksFor: {
       "@type": "Organization",
       name: profile.company,
       parentOrganization: {
         "@type": "Organization",
-        name: "Zone24x7",
+        name: profile.parentCompany,
         url: profile.companyUrl,
       },
     },

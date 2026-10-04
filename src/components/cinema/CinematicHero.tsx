@@ -294,7 +294,7 @@ export function CinematicHero() {
             className="mt-6 max-w-xl text-balance text-sm text-text-muted sm:text-lg"
             style={{ opacity: reduced ? 1 : undefined }}
           >
-            Associate Lead - AI &amp; ML, building{" "}
+            {profile.role}, building{" "}
             <span className="text-text">production agentic systems</span>.
           </p>
           <p
