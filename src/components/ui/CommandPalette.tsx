@@ -92,27 +92,31 @@ export function CommandPalette() {
   }, [commands, query]);
 
   // Open via ⌘K / Ctrl+K, or a custom event from elsewhere (e.g. the navbar).
+  // Every open starts from an empty query with the first row active.
   useEffect(() => {
+    const show = () => {
+      setQuery("");
+      setActive(0);
+      setOpen(true);
+    };
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setOpen((o) => !o);
+        if (open) setOpen(false);
+        else show();
       }
     };
-    const onOpen = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    window.addEventListener(OPEN_PALETTE_EVENT, onOpen);
+    window.addEventListener(OPEN_PALETTE_EVENT, show);
     return () => {
       window.removeEventListener("keydown", onKey);
-      window.removeEventListener(OPEN_PALETTE_EVENT, onOpen);
+      window.removeEventListener(OPEN_PALETTE_EVENT, show);
     };
-  }, []);
+  }, [open]);
 
-  // Reset + lock scroll while open.
+  // Lock scroll and focus the input while open.
   useEffect(() => {
     if (!open) return;
-    setQuery("");
-    setActive(0);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const id = requestAnimationFrame(() => inputRef.current?.focus());
@@ -121,11 +125,6 @@ export function CommandPalette() {
       cancelAnimationFrame(id);
     };
   }, [open]);
-
-  // Keep the active row in range as the filtered list changes.
-  useEffect(() => {
-    setActive((a) => Math.min(a, Math.max(0, filtered.length - 1)));
-  }, [filtered.length]);
 
   const onInputKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") {
@@ -178,7 +177,11 @@ export function CommandPalette() {
               <input
                 ref={inputRef}
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  // The list only changes with the query, so restart at the top.
+                  setActive(0);
+                }}
                 onKeyDown={onInputKey}
                 placeholder="Jump to a section, link or command…"
                 spellCheck={false}

@@ -10,7 +10,6 @@ Live at <https://gayashankariyawasam.github.io>.
 - [Tailwind CSS v4](https://tailwindcss.com)
 - [GSAP + ScrollTrigger](https://gsap.com) for scroll-driven sequences
 - [Motion](https://motion.dev) for component-level animation
-- [Three.js + React Three Fiber + drei](https://r3f.docs.pmnd.rs) for the hero scene
 - [Lenis](https://lenis.darkroom.engineering) for smooth scroll
 - [lucide-react](https://lucide.dev) for icons
 - Hosted on **GitHub Pages** via GitHub Actions
